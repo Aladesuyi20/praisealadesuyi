@@ -5,7 +5,8 @@ import {
   BarChart3, Database, LineChart, Code2, Trophy, Sparkles, GraduationCap,
   Briefcase, ChevronUp, ExternalLink, Send, Quote, Cpu, Brain, MessageSquare,
 } from "lucide-react";
-import profileImg from "@/assets/profile.jpg";
+import profileAsset from "@/assets/profile-bio.jpg.asset.json";
+const profileImg = profileAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
