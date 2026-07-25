@@ -20,8 +20,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Aladesuyi Praise Kolade — Data Analyst & Web Developer" },
       { name: "description", content: "Turning raw data into actionable insights. Portfolio of Aladesuyi Praise Kolade — Data Analyst, Computer Engineer, and modern web developer based in Ibadan, Nigeria." },
-      { property: "og:title", content: "Aladesuyi Praise Kolade — Portfolio" },
-      { property: "og:description", content: "Data Analyst turning raw data into actionable insights via SQL, Python, Power BI, and modern web apps." },
+      { property: "og:title", content: "Aladesuyi Praise Kolade — Data Analyst & Web Developer" },
+      { property: "og:description", content: "Turning raw data into actionable insights. Portfolio of Aladesuyi Praise Kolade — Data Analyst, Computer Engineer, and modern web developer based in Ibadan, Nigeria." },
     ],
   }),
   component: Portfolio,
