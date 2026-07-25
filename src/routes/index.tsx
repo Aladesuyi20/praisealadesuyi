@@ -6,7 +6,9 @@ import {
   Briefcase, ChevronUp, ExternalLink, Send, Quote, Cpu, Brain, MessageSquare,
 } from "lucide-react";
 import profileAsset from "@/assets/profile-bio.jpg.asset.json";
+import resumeAsset from "@/assets/ALADESUYI_PRAISE_CV.pdf.asset.json";
 const profileImg = profileAsset.url;
+const resumeUrl = resumeAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -140,7 +142,7 @@ function Hero() {
             <a href="#projects" className="inline-flex items-center gap-2 rounded-xl btn-primary-grad px-5 py-3 text-sm font-semibold">
               View Portfolio <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="/resume.pdf" className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 text-sm font-semibold hover:bg-white/10 transition">
+            <a href={resumeUrl} download="ALADESUYI_PRAISE_CV.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 text-sm font-semibold hover:bg-white/10 transition">
               <Download className="h-4 w-4" /> Download Resume
             </a>
             <a href="#contact" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-muted-foreground hover:text-foreground transition">
