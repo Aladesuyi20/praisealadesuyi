@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID = "service_liri6br";
+const EMAILJS_TEMPLATE_ID = "template_gg2mx7f";
+const EMAILJS_PUBLIC_KEY = "nAsHaQs96w0LPCaSM";
 import {
   ArrowRight, Download, Mail, Phone, MapPin, Github, Linkedin, Twitter,
   BarChart3, Database, LineChart, Code2, Trophy, Sparkles, GraduationCap,
