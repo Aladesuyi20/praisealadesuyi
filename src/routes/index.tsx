@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID = "service_liri6br";
+const EMAILJS_TEMPLATE_ID = "template_gg2mx7f";
+const EMAILJS_PUBLIC_KEY = "nAsHaQs96w0LPCaSM";
 import {
   ArrowRight, Download, Mail, Phone, MapPin, Github, Linkedin, Twitter,
   BarChart3, Database, LineChart, Code2, Trophy, Sparkles, GraduationCap,
@@ -493,12 +498,39 @@ function Testimonials() {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false);
-  function onSubmit(e: FormEvent) {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3500);
+    const form = e.currentTarget;
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const fd = new FormData(form);
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: String(fd.get("name") ?? ""),
+          from_email: String(fd.get("email") ?? ""),
+          subject: String(fd.get("subject") ?? "Portfolio contact"),
+          message: String(fd.get("message") ?? ""),
+          reply_to: String(fd.get("email") ?? ""),
+          to_email: "praisealadesuyi@gmail.com",
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      setStatus("sent");
+      form.reset();
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Failed to send. Please try again.");
+    }
   }
+
   const contacts = [
     { icon: Mail, label: "Email", value: "praisealadesuyi@gmail.com", href: "mailto:praisealadesuyi@gmail.com" },
     { icon: Phone, label: "Phone", value: "+234 903 764 4116", href: "tel:+2349037644116" },
@@ -530,22 +562,32 @@ function Contact() {
 
         <form onSubmit={onSubmit} className="glass rounded-3xl p-8">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Name" name="name" placeholder="Your full name" />
-            <Field label="Email" name="email" type="email" placeholder="you@company.com" />
+            <Field label="Name" name="name" placeholder="Your full name" required />
+            <Field label="Email" name="email" type="email" placeholder="you@company.com" required />
           </div>
           <Field label="Subject" name="subject" placeholder="What's this about?" className="mt-4" />
           <div className="mt-4">
             <label className="text-xs uppercase tracking-widest text-muted-foreground">Message</label>
             <textarea required rows={5} name="message" placeholder="Tell me a bit about the project..." className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm outline-none focus:border-[color:var(--cyan)]/60 focus:ring-2 focus:ring-[color:var(--cyan)]/20 transition" />
           </div>
-          <button type="submit" className="mt-6 inline-flex items-center gap-2 rounded-xl btn-primary-grad px-5 py-3 text-sm font-semibold">
-            {sent ? "Message sent ✓" : (<>Send message <Send className="h-4 w-4" /></>)}
+          <button type="submit" disabled={status === "sending"} className="mt-6 inline-flex items-center gap-2 rounded-xl btn-primary-grad px-5 py-3 text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed">
+            {status === "sending" && "Sending..."}
+            {status === "sent" && "Message sent ✓"}
+            {status === "error" && "Try again"}
+            {status === "idle" && (<>Send message <Send className="h-4 w-4" /></>)}
           </button>
+          {status === "error" && (
+            <p className="mt-3 text-sm text-red-400">{errorMsg}</p>
+          )}
+          {status === "sent" && (
+            <p className="mt-3 text-sm text-[color:var(--cyan)]">Thanks! I'll get back to you soon.</p>
+          )}
         </form>
       </div>
     </section>
   );
 }
+
 
 function Field({ label, className = "", ...props }: { label: string; className?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
