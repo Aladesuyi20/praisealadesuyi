@@ -6,7 +6,9 @@ import {
   Briefcase, ChevronUp, ExternalLink, Send, Quote, Cpu, Brain, MessageSquare,
 } from "lucide-react";
 import profileAsset from "@/assets/profile-bio.jpg.asset.json";
+import resumeAsset from "@/assets/ALADESUYI_PRAISE_CV.pdf.asset.json";
 const profileImg = profileAsset.url;
+const resumeUrl = resumeAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
