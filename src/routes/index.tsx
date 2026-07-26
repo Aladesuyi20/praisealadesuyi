@@ -1,497 +1,450 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
+import {
+  ArrowRight, ArrowDown, Menu, X, Mail, Phone, MapPin,
+  Instagram, Facebook, Youtube, Dumbbell, HeartPulse,
+  Users, Activity, Send, Quote, Check, ChevronRight,
+} from "lucide-react";
+import heroImg from "@/assets/hero-gym.jpg";
+import classesImg from "@/assets/gym-classes.jpg";
+import personalImg from "@/assets/gym-personal.jpg";
+import rehabImg from "@/assets/gym-rehab.jpg";
+import trainer1 from "@/assets/trainer-1.jpg";
+import trainer2 from "@/assets/trainer-2.jpg";
+import trainer3 from "@/assets/trainer-3.jpg";
 
 const EMAILJS_SERVICE_ID = "service_liri6br";
 const EMAILJS_TEMPLATE_ID = "template_gg2mx7f";
 const EMAILJS_PUBLIC_KEY = "nAsHaQs96w0LPCaSM";
-import {
-  ArrowRight, Download, Mail, Phone, MapPin, Github, Linkedin, Twitter,
-  BarChart3, Database, LineChart, Code2, Trophy, Sparkles, GraduationCap,
-  Briefcase, ChevronUp, ExternalLink, Send, Quote, Cpu, Brain, MessageSquare,
-} from "lucide-react";
-import profileAsset from "@/assets/profile-bio.jpg.asset.json";
-import resumeAsset from "@/assets/ALADESUYI_PRAISE_CV.pdf.asset.json";
-const profileImg = profileAsset.url;
-const resumeUrl = resumeAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aladesuyi Praise Kolade — Data Analyst & Web Developer" },
-      { name: "description", content: "Turning raw data into actionable insights. Portfolio of Aladesuyi Praise Kolade — Data Analyst, Computer Engineer, and modern web developer based in Ibadan, Nigeria." },
-      { property: "og:title", content: "Aladesuyi Praise Kolade — Data Analyst & Web Developer" },
-      { property: "og:description", content: "Turning raw data into actionable insights. Portfolio of Aladesuyi Praise Kolade — Data Analyst, Computer Engineer, and modern web developer based in Ibadan, Nigeria." },
+      { title: "PulseGym — Fitness · Strength · Lifestyle" },
+      { name: "description", content: "PulseGym is a premium personal-training studio. Strength, conditioning, rehab, and coaching that transforms." },
+      { property: "og:title", content: "PulseGym — Fitness · Strength · Lifestyle" },
+      { property: "og:description", content: "Premium personal-training studio. Strength, conditioning, rehab, and coaching built to transform." },
     ],
   }),
-  component: Portfolio,
+  component: PulseGym,
 });
 
 const nav = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#services", label: "Services" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { label: "Classes", href: "#classes" },
+  { label: "Training", href: "#training" },
+  { label: "Team", href: "#team" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Contact", href: "#contact" },
 ];
 
-function Portfolio() {
-  const [scrolled, setScrolled] = useState(0);
-  const [showTop, setShowTop] = useState(false);
+function PulseGym() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      const h = document.documentElement;
-      const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-      setScrolled(pct);
-      setShowTop(h.scrollTop > 500);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-foreground">
-      <div className="fixed left-0 top-0 z-[60] h-[3px] w-full bg-transparent">
-        <div className="h-full btn-primary-grad transition-[width] duration-150" style={{ width: `${scrolled}%` }} />
-      </div>
+    <main className="bg-background text-foreground">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all ${
+          scrolled ? "bg-white/95 backdrop-blur-md shadow-sm py-3" : "bg-transparent py-5"
+        }`}
+      >
+        <div className="container-x flex items-center justify-between">
+          <a href="#home" className="flex items-center gap-2">
+            <div className="grid place-items-center w-9 h-9 bg-[color:var(--ink)] text-white font-display text-lg">P</div>
+            <span className={`font-display text-xl tracking-widest ${scrolled ? "text-[color:var(--ink)]" : "text-white"}`}>
+              PULSE<span className="text-[color:var(--blaze)]">GYM</span>
+            </span>
+          </a>
+          <nav className="hidden md:flex items-center gap-8">
+            {nav.map((n) => (
+              <a
+                key={n.label}
+                href={n.href}
+                className={`font-display text-sm tracking-[0.2em] transition hover:text-[color:var(--blaze)] ${
+                  scrolled ? "text-[color:var(--ink)]" : "text-white"
+                }`}
+              >
+                {n.label.toUpperCase()}
+              </a>
+            ))}
+            <a href="#contact" className="btn-primary text-xs">
+              Join Now <ArrowRight size={14} />
+            </a>
+          </nav>
+          <button
+            className={`md:hidden ${scrolled ? "text-[color:var(--ink)]" : "text-white"}`}
+            onClick={() => setOpen(!open)}
+            aria-label="Menu"
+          >
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
+        {open && (
+          <div className="md:hidden bg-white border-t border-black/10">
+            <div className="container-x py-6 flex flex-col gap-4">
+              {nav.map((n) => (
+                <a
+                  key={n.label}
+                  href={n.href}
+                  onClick={() => setOpen(false)}
+                  className="font-display tracking-widest text-[color:var(--ink)]"
+                >
+                  {n.label.toUpperCase()}
+                </a>
+              ))}
+              <a href="#contact" onClick={() => setOpen(false)} className="btn-primary self-start">
+                Join Now
+              </a>
+            </div>
+          </div>
+        )}
+      </header>
 
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-[#2563EB]/25 blur-3xl animate-blob" />
-        <div className="absolute top-1/3 -right-40 h-[560px] w-[560px] rounded-full bg-[#38BDF8]/20 blur-3xl animate-blob" style={{ animationDelay: "-6s" }} />
-        <div className="absolute bottom-0 left-1/3 h-[420px] w-[420px] rounded-full bg-[#081C3A]/40 blur-3xl animate-blob" style={{ animationDelay: "-12s" }} />
-      </div>
-
-      <Header />
       <Hero />
+      <Marquee />
       <About />
-      <Experience />
-      <Skills />
-      <Services />
-      <Projects />
+      <Offer />
+      <Training />
+      <Team />
+      <Pricing />
       <Testimonials />
       <Contact />
       <Footer />
-
-      {showTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-50 grid h-12 w-12 place-items-center rounded-full glass hover:scale-110 transition"
-        >
-          <ChevronUp className="h-5 w-5" />
-        </button>
-      )}
-    </div>
-  );
-}
-
-function Header() {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="sticky top-0 z-50 w-full">
-      <div className="mx-auto mt-4 max-w-6xl px-4">
-        <div className="glass flex items-center justify-between rounded-2xl px-4 py-3 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.6)]">
-          <a href="#top" className="flex items-center gap-2 font-display font-bold tracking-tight">
-            <span className="grid h-8 w-8 place-items-center rounded-lg btn-primary-grad text-sm">A</span>
-            <span className="hidden sm:inline">Aladesuyi<span className="text-[color:var(--cyan)]">.</span></span>
-          </a>
-          <nav className="hidden md:flex items-center gap-1">
-            {nav.map((n) => (
-              <a key={n.href} href={n.href} className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition">{n.label}</a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-2">
-            <a href="#contact" className="hidden sm:inline-flex items-center gap-2 rounded-xl btn-primary-grad px-4 py-2 text-sm font-medium">
-              Hire me <ArrowRight className="h-4 w-4" />
-            </a>
-            <button onClick={() => setOpen(v => !v)} className="md:hidden grid h-9 w-9 place-items-center rounded-lg glass" aria-label="Menu">
-              <div className="space-y-1.5">
-                <span className="block h-0.5 w-4 bg-foreground" />
-                <span className="block h-0.5 w-4 bg-foreground" />
-              </div>
-            </button>
-          </div>
-        </div>
-        {open && (
-          <div className="glass mt-2 rounded-2xl p-2 md:hidden animate-rise">
-            {nav.map((n) => (
-              <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="block rounded-lg px-3 py-2 text-sm hover:bg-white/5">{n.label}</a>
-            ))}
-          </div>
-        )}
-      </div>
-    </header>
+    </main>
   );
 }
 
 function Hero() {
   return (
-    <section id="top" className="relative pt-16 pb-24 sm:pt-24 sm:pb-32" style={{ backgroundImage: "var(--gradient-hero)" }}>
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-4 lg:grid-cols-[1.15fr_1fr]">
-        <div className="animate-rise">
-          <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs text-muted-foreground">
-            <span className="h-2 w-2 rounded-full bg-[color:var(--cyan)] shadow-[0_0_10px_var(--cyan)]" />
-            Available for new projects
-          </span>
-          <h1 className="mt-5 text-4xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
-            Turning Data Into <br />
-            <span className="gradient-text">Actionable Insights.</span>
+    <section id="home" className="relative h-[100svh] w-full overflow-hidden">
+      <img
+        src={heroImg}
+        alt="Athlete lifting barbell"
+        className="absolute inset-0 h-full w-full object-cover"
+        width={1920}
+        height={1280}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+      <div className="relative z-10 h-full container-x flex flex-col justify-end pb-24 pt-32">
+        <div className="max-w-4xl animate-rise">
+          <span className="eyebrow text-white/80">Fitness · Strength · Lifestyle</span>
+          <h1 className="mt-6 font-display text-white text-6xl sm:text-7xl md:text-[8rem] leading-[0.9]">
+            Train hard.<br />
+            <span className="text-[color:var(--blaze)]">Live strong.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-            I'm <span className="text-foreground font-medium">Aladesuyi Praise Kolade</span>, a Data Analyst and Computer Engineer helping businesses transform raw data into decisions through analytics, visualization, and intelligent tooling.
+          <p className="mt-8 max-w-xl text-lg text-white/85 leading-relaxed">
+            A premium personal-training studio built around five pillars: strength,
+            conditioning, rehab, mobility, and mindset. No fluff — just real coaching
+            that gets you real results.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#projects" className="inline-flex items-center gap-2 rounded-xl btn-primary-grad px-5 py-3 text-sm font-semibold">
-              View Portfolio <ArrowRight className="h-4 w-4" />
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a href="#contact" className="btn-primary">
+              Book a trial <ArrowRight size={16} />
             </a>
-            <a href={resumeUrl} download="ALADESUYI_PRAISE_CV.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 text-sm font-semibold hover:bg-white/10 transition">
-              <Download className="h-4 w-4" /> Download Resume
-            </a>
-            <a href="#contact" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-muted-foreground hover:text-foreground transition">
-              Contact Me
-            </a>
-          </div>
-
-          <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4">
-            {[
-              { k: "2+", v: "Years experience" },
-              { k: "4", v: "Featured projects" },
-              { k: "10+", v: "Tools mastered" },
-            ].map((s) => (
-              <div key={s.v} className="glass rounded-2xl p-4">
-                <dt className="text-2xl font-bold gradient-text">{s.k}</dt>
-                <dd className="mt-1 text-xs text-muted-foreground">{s.v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
-        <div className="relative mx-auto w-full max-w-md">
-          <div className="glow-ring relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] glass">
-            <img
-              src={profileImg}
-              alt="Aladesuyi Praise Kolade portrait"
-              width={1024}
-              height={1280}
-              className="h-full w-full object-cover"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050816]/80 via-transparent to-transparent" />
-          </div>
-
-          <FloatCard className="-top-4 -left-6 sm:-left-10" icon={<BarChart3 className="h-4 w-4" />} title="Power BI" subtitle="Dashboards" delay="0s" />
-          <FloatCard className="top-1/3 -right-4 sm:-right-8" icon={<Database className="h-4 w-4" />} title="SQL & Python" subtitle="Analytics" delay="-2s" />
-          <FloatCard className="-bottom-4 left-4 sm:left-8" icon={<Trophy className="h-4 w-4" />} title="Sports Analytics" subtitle="Football insights" delay="-4s" />
-
-          <div className="absolute -bottom-8 right-2 sm:right-0 glass rounded-2xl p-3 animate-float" style={{ animationDelay: "-3s" }}>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground"><LineChart className="h-3.5 w-3.5 text-[color:var(--cyan)]" /> Revenue ↑ 34%</div>
-            <svg viewBox="0 0 100 30" className="mt-1 h-8 w-32">
-              <polyline fill="none" stroke="url(#g)" strokeWidth="2" points="0,22 12,18 24,20 36,12 48,15 60,8 72,10 84,4 100,6" />
-              <defs>
-                <linearGradient id="g" x1="0" x2="1">
-                  <stop offset="0" stopColor="#2563EB" />
-                  <stop offset="1" stopColor="#38BDF8" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <a href="#training" className="btn-ghost">Explore programs</a>
           </div>
         </div>
       </div>
+      <a
+        href="#about"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white/80 animate-bounce-down"
+        aria-label="Scroll down"
+      >
+        <ArrowDown />
+      </a>
     </section>
   );
 }
 
-function FloatCard({ className = "", icon, title, subtitle, delay = "0s" }: { className?: string; icon: React.ReactNode; title: string; subtitle: string; delay?: string }) {
+function Marquee() {
+  const items = ["STRENGTH", "MOBILITY", "REHAB", "CONDITIONING", "NUTRITION", "MINDSET", "COMMUNITY"];
+  const row = [...items, ...items, ...items];
   return (
-    <div className={`absolute glass rounded-2xl px-3 py-2.5 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] animate-float ${className}`} style={{ animationDelay: delay }}>
-      <div className="flex items-center gap-2">
-        <span className="grid h-8 w-8 place-items-center rounded-xl btn-primary-grad">{icon}</span>
-        <div>
-          <div className="text-xs font-semibold">{title}</div>
-          <div className="text-[10px] text-muted-foreground">{subtitle}</div>
-        </div>
+    <div className="bg-[color:var(--ink)] text-white py-6 overflow-hidden border-y border-white/10">
+      <div className="marquee-track">
+        {row.map((t, i) => (
+          <span key={i} className="font-display text-3xl md:text-4xl tracking-[0.3em] flex items-center gap-16">
+            {t}
+            <span className="text-[color:var(--blaze)]">✦</span>
+          </span>
+        ))}
       </div>
-    </div>
-  );
-}
-
-function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle?: string }) {
-  return (
-    <div className="mx-auto max-w-2xl text-center">
-      <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs uppercase tracking-widest text-muted-foreground">
-        <Sparkles className="h-3 w-3 text-[color:var(--cyan)]" /> {eyebrow}
-      </span>
-      <h2 className="mt-4 text-3xl font-bold sm:text-5xl">{title}</h2>
-      {subtitle && <p className="mt-3 text-muted-foreground">{subtitle}</p>}
     </div>
   );
 }
 
 function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeader eyebrow="About" title="Engineer by training, analyst by craft." subtitle="I love the moment raw numbers turn into a story leaders can act on." />
-      <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
-        <div className="glass rounded-3xl p-8">
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            I'm a Computer Engineering graduate obsessed with solving real business problems using data. My work spans <span className="text-foreground">analytics, business intelligence, sports analytics,</span> and building modern web applications that ship. I care about clarity, speed, and decisions — not just charts.
+    <section id="about" className="py-24 md:py-32 bg-background">
+      <div className="container-x grid md:grid-cols-12 gap-12 items-start">
+        <div className="md:col-span-5">
+          <span className="eyebrow">About PulseGym</span>
+          <h2 className="mt-4 font-display text-5xl md:text-6xl leading-[0.95]">
+            More than a gym.<br />
+            A movement.
+          </h2>
+        </div>
+        <div className="md:col-span-7 space-y-6 text-lg leading-relaxed text-muted-foreground">
+          <p>
+            PulseGym was founded on one belief — that every person deserves a
+            strong body, a sharp mind, and unshakeable confidence. We build our
+            programs around five key pillars: <strong className="text-foreground">Strength</strong>,{" "}
+            <strong className="text-foreground">Conditioning</strong>,{" "}
+            <strong className="text-foreground">Rehab</strong>,{" "}
+            <strong className="text-foreground">Mobility</strong>, and{" "}
+            <strong className="text-foreground">Mindset</strong>.
           </p>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <p>
+            Our floor is stocked with world-class equipment. Our coaches are
+            certified, patient, and relentless. Whether you're chasing your
+            first pull-up or your first hundred, we meet you where you are —
+            and take you further than you thought possible.
+          </p>
+          <div className="grid grid-cols-3 gap-6 pt-6 border-t border-border">
             {[
-              { icon: Brain, label: "Analytics" },
-              { icon: BarChart3, label: "BI" },
-              { icon: Trophy, label: "Sports" },
-              { icon: Code2, label: "Web" },
-            ].map(({ icon: Icon, label }) => (
-              <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center hover:border-[color:var(--cyan)]/40 transition">
-                <Icon className="mx-auto h-5 w-5 text-[color:var(--cyan)]" />
-                <div className="mt-2 text-sm font-medium">{label}</div>
+              { k: "10+", v: "Expert coaches" },
+              { k: "500+", v: "Members trained" },
+              { k: "8", v: "Years strong" },
+            ].map((s) => (
+              <div key={s.v}>
+                <div className="font-display text-4xl md:text-5xl text-[color:var(--ink)]">{s.k}</div>
+                <div className="text-sm uppercase tracking-widest text-muted-foreground mt-2">{s.v}</div>
               </div>
             ))}
           </div>
         </div>
-
-        <div className="glass rounded-3xl p-8">
-          <h3 className="flex items-center gap-2 text-lg font-semibold"><GraduationCap className="h-5 w-5 text-[color:var(--cyan)]" /> Education</h3>
-          <ol className="mt-6 space-y-6 border-l border-white/10 pl-6">
-            <TimelineItem title="B.Eng, Computer Engineering" org="Federal University Oye-Ekiti" time="Graduated 2025" />
-            <TimelineItem title="Certificate of Achievement" org="ALX Africa" time="2026" />
-          </ol>
-        </div>
       </div>
     </section>
   );
 }
 
-function TimelineItem({ title, org, time, children }: { title: string; org: string; time: string; children?: React.ReactNode }) {
+function Offer() {
+  const cards = [
+    { title: "Personal Training", copy: "1-on-1 coaching built around your body, your goals, your schedule.", img: personalImg, tag: "Most popular" },
+    { title: "Group Classes", copy: "High-energy small-group sessions — kettlebell, HIIT, mobility.", img: classesImg },
+    { title: "Rehab & Recovery", copy: "Physio-led recovery to get you back stronger than before.", img: rehabImg },
+  ];
   return (
-    <li className="relative">
-      <span className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full btn-primary-grad ring-4 ring-[#050816]" />
-      <div className="text-sm text-[color:var(--cyan)]">{time}</div>
-      <div className="mt-1 font-semibold">{title}</div>
-      <div className="text-sm text-muted-foreground">{org}</div>
-      {children && <div className="mt-3 text-sm text-muted-foreground">{children}</div>}
-    </li>
-  );
-}
-
-function Experience() {
-  return (
-    <section id="experience" className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeader eyebrow="Experience" title="A short but focused journey." />
-      <div className="mt-14 grid gap-6 lg:grid-cols-2">
-        <div className="glass rounded-3xl p-8 hover:-translate-y-1 transition">
-          <div className="flex items-center gap-3 text-[color:var(--cyan)] text-xs uppercase tracking-widest"><Briefcase className="h-4 w-4" /> July 2026 – Present</div>
-          <h3 className="mt-3 text-2xl font-bold">Data Analyst</h3>
-          <div className="text-muted-foreground">Cloudware Technologies</div>
-          <ul className="mt-5 grid gap-2 text-sm text-muted-foreground">
-            {["Data cleaning and modeling","SQL analysis at scale","Python analytics (Pandas/NumPy)","Power BI dashboards","Excel reporting","Business insights & storytelling"].map(x => (
-              <li key={x} className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--cyan)]" /> {x}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="glass rounded-3xl p-8 hover:-translate-y-1 transition">
-          <div className="flex items-center gap-3 text-[color:var(--cyan)] text-xs uppercase tracking-widest"><Briefcase className="h-4 w-4" /> April 2024 – August 2024</div>
-          <h3 className="mt-3 text-2xl font-bold">ICT Intern</h3>
-          <div className="text-muted-foreground">ICT Unit — Federal University Oye-Ekiti</div>
-          <ul className="mt-5 grid gap-2 text-sm text-muted-foreground">
-            {["Technical support","Hardware troubleshooting","Software installation","Network support"].map(x => (
-              <li key={x} className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--cyan)]" /> {x}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const skillGroups = [
-  {
-    icon: BarChart3, name: "Analytics",
-    items: [
-      { k: "Data Analysis", v: 92 },
-      { k: "Data Cleaning", v: 90 },
-      { k: "Statistics", v: 82 },
-      { k: "Dashboard Development", v: 88 },
-      { k: "Data Visualization", v: 90 },
-    ],
-  },
-  {
-    icon: Cpu, name: "Tools",
-    items: [
-      { k: "Excel", v: 95 },
-      { k: "SQL", v: 88 },
-      { k: "Power BI", v: 90 },
-      { k: "Python (Pandas, NumPy, Matplotlib)", v: 85 },
-    ],
-  },
-  {
-    icon: MessageSquare, name: "Soft Skills",
-    items: [
-      { k: "Communication", v: 92 },
-      { k: "Problem Solving", v: 94 },
-      { k: "Critical Thinking", v: 90 },
-    ],
-  },
-];
-
-function Skills() {
-  return (
-    <section id="skills" className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeader eyebrow="Skills" title="The stack behind the insights." />
-      <div className="mt-14 grid gap-6 lg:grid-cols-3">
-        {skillGroups.map((g) => (
-          <div key={g.name} className="glass rounded-3xl p-7 hover:-translate-y-1 transition">
-            <div className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-xl btn-primary-grad"><g.icon className="h-5 w-5" /></span>
-              <h3 className="text-lg font-semibold">{g.name}</h3>
-            </div>
-            <ul className="mt-6 space-y-4">
-              {g.items.map((it) => (
-                <li key={it.k}>
-                  <div className="flex items-center justify-between text-sm">
-                    <span>{it.k}</span>
-                    <span className="text-muted-foreground">{it.v}%</span>
-                  </div>
-                  <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
-                    <div className="h-full rounded-full btn-primary-grad bar-grow" style={{ width: `${it.v}%` }} />
-                  </div>
-                </li>
-              ))}
-            </ul>
+    <section id="classes" className="py-24 md:py-32 bg-[color:var(--bone)]">
+      <div className="container-x">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div>
+            <span className="eyebrow">What we offer</span>
+            <h2 className="mt-4 font-display text-5xl md:text-6xl leading-[0.95]">
+              Programs that<br />actually work.
+            </h2>
           </div>
-        ))}
+          <a href="#training" className="font-display tracking-widest text-sm text-[color:var(--ink)] hover:text-[color:var(--blaze)] transition inline-flex items-center gap-2">
+            View all training <ChevronRight size={16} />
+          </a>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {cards.map((c) => (
+            <article
+              key={c.title}
+              className="group relative overflow-hidden bg-white aspect-[3/4] cursor-pointer"
+            >
+              <img
+                src={c.img}
+                alt={c.title}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+              {c.tag && (
+                <span className="absolute top-6 left-6 bg-[color:var(--blaze)] text-white text-[11px] uppercase tracking-widest px-3 py-1 font-display">
+                  {c.tag}
+                </span>
+              )}
+              <div className="absolute inset-x-0 bottom-0 p-8 text-white">
+                <h3 className="font-display text-3xl">{c.title}</h3>
+                <p className="mt-3 text-sm text-white/80 leading-relaxed">{c.copy}</p>
+                <div className="mt-6 inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border-b border-white/60 pb-1 group-hover:border-[color:var(--blaze)] group-hover:text-[color:var(--blaze)] transition">
+                  Learn more <ArrowRight size={14} />
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-const services = [
-  { icon: BarChart3, title: "Data Analysis", desc: "Transform raw datasets into actionable business insights — from cleaning to storytelling." },
-  { icon: Trophy, title: "Sports Data Analysis", desc: "Football and sports performance analytics using player metrics, models, and visualization." },
-  { icon: Code2, title: "Web Development", desc: "Responsive, fast, modern websites and dashboards built with React, HTML, CSS, and JavaScript." },
-];
-
-function Services() {
+function Training() {
+  const pillars = [
+    { icon: Dumbbell, title: "Strength & Conditioning", copy: "Structured barbell and kettlebell programs to build raw strength and full-body power." },
+    { icon: HeartPulse, title: "Rehab & Prehab", copy: "Physio-led movement screening and recovery protocols that keep you training pain-free." },
+    { icon: Activity, title: "Mobility & Movement", copy: "Restore range of motion, fix imbalances, and move like an athlete — at any age." },
+    { icon: Users, title: "Small Group Coaching", copy: "Capped at 6. Personalised attention with the energy of a team session." },
+  ];
   return (
-    <section id="services" className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeader eyebrow="Services" title="What I can build for you." />
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
-        {services.map((s) => (
-          <div key={s.title} className="group relative overflow-hidden glass rounded-3xl p-7 hover:-translate-y-1 transition">
-            <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[color:var(--cyan)]/10 blur-2xl group-hover:bg-[color:var(--cyan)]/25 transition" />
-            <span className="grid h-12 w-12 place-items-center rounded-2xl btn-primary-grad"><s.icon className="h-6 w-6" /></span>
-            <h3 className="mt-5 text-xl font-semibold">{s.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
-            <div className="mt-6 inline-flex items-center gap-1 text-sm text-[color:var(--cyan)]">Learn more <ArrowRight className="h-4 w-4" /></div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-const projects = [
-  {
-    title: "Premier League Analytics Dashboard",
-    desc: "Football analytics dashboard: team performance, player stats, and league trends via interactive visualizations.",
-    tags: ["Python", "SQL", "Power BI"],
-    accent: "from-[#2563EB] to-[#38BDF8]",
-    icon: Trophy,
-  },
-  {
-    title: "Sales Performance Dashboard",
-    desc: "Interactive Power BI dashboard monitoring KPIs, sales trends, and business performance in real time.",
-    tags: ["Power BI", "Excel"],
-    accent: "from-[#0EA5E9] to-[#22D3EE]",
-    icon: BarChart3,
-  },
-  {
-    title: "HarvestHub Website",
-    desc: "A responsive agri-tech marketplace connecting farmers and buyers through a modern web platform.",
-    tags: ["React", "HTML", "CSS", "JavaScript"],
-    accent: "from-[#22D3EE] to-[#2563EB]",
-    icon: Code2,
-  },
-  {
-    title: "Pulse Gym Website",
-    desc: "Modern fitness website with membership features, class schedules, and responsive design.",
-    tags: ["React", "HTML", "CSS", "JavaScript"],
-    accent: "from-[#38BDF8] to-[#2563EB]",
-    icon: Code2,
-  },
-];
-
-function Projects() {
-  return (
-    <section id="projects" className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeader eyebrow="Featured Projects" title="Selected work." subtitle="A mix of analytics dashboards and modern web builds." />
-      <div className="mt-14 grid gap-6 md:grid-cols-2">
-        {projects.map((p) => (
-          <article key={p.title} className="group relative overflow-hidden glass rounded-3xl p-6 hover:-translate-y-1 transition">
-            <div className={`relative h-44 overflow-hidden rounded-2xl bg-gradient-to-br ${p.accent}`}>
-              <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 60%, white 1px, transparent 1px)", backgroundSize: "24px 24px, 32px 32px" }} />
-              <MockChart />
-              <p.icon className="absolute right-4 top-4 h-6 w-6 text-white/90" />
+    <section id="training" className="py-24 md:py-32 bg-[color:var(--ink)] text-white">
+      <div className="container-x">
+        <div className="max-w-3xl">
+          <span className="eyebrow">Our five pillars</span>
+          <h2 className="mt-4 font-display text-5xl md:text-6xl leading-[0.95] text-white">
+            Every program.<br />Every body. Every goal.
+          </h2>
+        </div>
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {pillars.map(({ icon: Icon, title, copy }) => (
+            <div key={title} className="border-t border-white/20 pt-8 group">
+              <Icon className="text-[color:var(--blaze)] mb-6 group-hover:scale-110 transition-transform" size={40} strokeWidth={1.5} />
+              <h3 className="font-display text-2xl text-white">{title}</h3>
+              <p className="mt-4 text-white/70 text-sm leading-relaxed">{copy}</p>
             </div>
-            <div className="mt-5 flex items-start justify-between gap-4">
-              <h3 className="text-xl font-semibold">{p.title}</h3>
-              <div className="flex gap-2 shrink-0">
-                <a href="#" aria-label="Live demo" className="grid h-9 w-9 place-items-center rounded-lg glass hover:bg-white/10 transition"><ExternalLink className="h-4 w-4" /></a>
-                <a href="https://github.com/Aladesuyi20" target="_blank" rel="noreferrer" aria-label="GitHub" className="grid h-9 w-9 place-items-center rounded-lg glass hover:bg-white/10 transition"><Github className="h-4 w-4" /></a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Team() {
+  const trainers = [
+    { name: "Marcus Ade", role: "Head Strength Coach", img: trainer1, tags: ["Powerlifting", "Barbell"] },
+    { name: "Zainab Okafor", role: "Performance Coach", img: trainer2, tags: ["Conditioning", "Women's Health"] },
+    { name: "Tobi Ekundayo", role: "Movement Specialist", img: trainer3, tags: ["Mobility", "Rehab"] },
+  ];
+  return (
+    <section id="team" className="py-24 md:py-32 bg-background">
+      <div className="container-x">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div>
+            <span className="eyebrow">Meet the team</span>
+            <h2 className="mt-4 font-display text-5xl md:text-6xl leading-[0.95]">
+              Coaches who<br />take it seriously.
+            </h2>
+          </div>
+          <p className="max-w-md text-muted-foreground">
+            Certified, patient, and obsessed with the craft. Every trainer at
+            PulseGym has spent years refining their eye for movement.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {trainers.map((t) => (
+            <div key={t.name} className="group">
+              <div className="relative overflow-hidden aspect-[4/5] bg-muted">
+                <img
+                  src={t.img}
+                  alt={t.name}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition" />
+              </div>
+              <div className="mt-6">
+                <h3 className="font-display text-2xl">{t.name}</h3>
+                <p className="text-sm text-muted-foreground uppercase tracking-widest mt-1">{t.role}</p>
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {t.tags.map((tag) => (
+                  <span key={tag} className="text-[11px] uppercase tracking-widest border border-border px-2 py-1">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {p.tags.map((t) => (
-                <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground">{t}</span>
-              ))}
-            </div>
-          </article>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-function MockChart() {
-  const bars = [45, 62, 38, 78, 55, 88, 70, 92];
+function Pricing() {
+  const plans = [
+    { name: "Drop-in", price: "₦8,000", per: "single session", features: ["Access to any group class", "Full facility access", "No commitment"] },
+    { name: "Monthly", price: "₦45,000", per: "per month", featured: true, features: ["Unlimited group classes", "1 personal-training session", "Nutrition guidance", "Recovery lounge"] },
+    { name: "PT Pro", price: "₦120,000", per: "per month", features: ["8 personal-training sessions", "Unlimited group classes", "Custom nutrition plan", "Priority booking"] },
+  ];
   return (
-    <div className="absolute bottom-4 left-4 right-4 flex h-24 items-end gap-1.5">
-      {bars.map((b, i) => (
-        <div key={i} className="flex-1 rounded-t-md bg-white/70 backdrop-blur" style={{ height: `${b}%` }} />
-      ))}
-    </div>
+    <section id="pricing" className="py-24 md:py-32 bg-[color:var(--bone)]">
+      <div className="container-x">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="eyebrow">Membership</span>
+          <h2 className="mt-4 font-display text-5xl md:text-6xl leading-[0.95]">
+            Simple pricing.<br />Serious results.
+          </h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {plans.map((p) => (
+            <div
+              key={p.name}
+              className={`p-10 flex flex-col ${
+                p.featured ? "bg-[color:var(--ink)] text-white md:-translate-y-4 shadow-2xl" : "bg-white border border-border"
+              }`}
+            >
+              {p.featured && (
+                <span className="self-start bg-[color:var(--blaze)] text-white text-[11px] uppercase tracking-widest px-3 py-1 font-display mb-6">
+                  Most popular
+                </span>
+              )}
+              <h3 className="font-display text-3xl">{p.name}</h3>
+              <div className="mt-6 flex items-baseline gap-2">
+                <span className="font-display text-6xl">{p.price}</span>
+                <span className={`text-sm uppercase tracking-widest ${p.featured ? "text-white/60" : "text-muted-foreground"}`}>/{p.per}</span>
+              </div>
+              <ul className="mt-8 space-y-3 flex-1">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-start gap-3 text-sm">
+                    <Check size={18} className={p.featured ? "text-[color:var(--blaze)]" : "text-[color:var(--ink)]"} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#contact"
+                className={`mt-10 inline-flex items-center justify-center gap-2 py-4 font-display tracking-widest text-xs transition ${
+                  p.featured ? "bg-[color:var(--blaze)] text-white hover:bg-white hover:text-[color:var(--ink)]" : "bg-[color:var(--ink)] text-white hover:bg-[color:var(--blaze)]"
+                }`}
+              >
+                Choose {p.name} <ArrowRight size={14} />
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
-
-const testimonials = [
-  { name: "Team Lead", role: "Cloudware Technologies", quote: "Praise transformed our reporting stack. Dashboards that used to take weeks now take days — and they actually get used." },
-  { name: "Project Manager", role: "Agri-tech Startup", quote: "Shipped clean, fast, and pixel-perfect. Rare combination of analytical mind and product taste." },
-  { name: "Faculty Supervisor", role: "FUOYE", quote: "One of the most self-driven engineers I've worked with. Turns questions into decisions, quickly." },
-];
 
 function Testimonials() {
+  const quotes = [
+    { q: "PulseGym is the first place I've trained where I actually feel seen. The coaching is unmatched.", n: "Chidera A.", r: "Member since 2022" },
+    { q: "I came in for weight loss. I stayed for the community. Down 18kg and stronger than I've ever been.", n: "Yusuf B.", r: "Member since 2021" },
+    { q: "The rehab program got me squatting pain-free after two years of avoiding the gym. Life-changing.", n: "Aisha O.", r: "Member since 2023" },
+  ];
   return (
-    <section className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeader eyebrow="Testimonials" title="Kind words." />
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
-        {testimonials.map((t) => (
-          <figure key={t.name} className="glass rounded-3xl p-7 hover:-translate-y-1 transition">
-            <Quote className="h-6 w-6 text-[color:var(--cyan)]" />
-            <blockquote className="mt-4 text-sm leading-relaxed text-muted-foreground">"{t.quote}"</blockquote>
-            <figcaption className="mt-6 flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-full btn-primary-grad text-sm font-bold">{t.name[0]}</div>
-              <div>
-                <div className="text-sm font-semibold">{t.name}</div>
-                <div className="text-xs text-muted-foreground">{t.role}</div>
-              </div>
-            </figcaption>
-          </figure>
-        ))}
+    <section className="py-24 md:py-32 bg-background">
+      <div className="container-x">
+        <div className="max-w-3xl mb-16">
+          <span className="eyebrow">Testimonials</span>
+          <h2 className="mt-4 font-display text-5xl md:text-6xl leading-[0.95]">
+            Real people.<br />Real transformations.
+          </h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {quotes.map((q) => (
+            <blockquote key={q.n} className="bg-[color:var(--bone)] p-10">
+              <Quote className="text-[color:var(--blaze)]" size={32} />
+              <p className="mt-6 text-lg leading-relaxed">"{q.q}"</p>
+              <footer className="mt-8 pt-6 border-t border-black/10">
+                <div className="font-display text-lg">{q.n}</div>
+                <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">{q.r}</div>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -499,88 +452,103 @@ function Testimonials() {
 
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState<string>("");
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
+    const data = new FormData(form);
     setStatus("sending");
-    setErrorMsg("");
     try {
-      const fd = new FormData(form);
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          from_name: String(fd.get("name") ?? ""),
-          from_email: String(fd.get("email") ?? ""),
-          subject: String(fd.get("subject") ?? "Portfolio contact"),
-          message: String(fd.get("message") ?? ""),
-          reply_to: String(fd.get("email") ?? ""),
-          to_email: "praisealadesuyi@gmail.com",
+          from_name: data.get("name"),
+          from_email: data.get("email"),
+          subject: data.get("subject") || "PulseGym enquiry",
+          message: data.get("message"),
         },
         { publicKey: EMAILJS_PUBLIC_KEY },
       );
       setStatus("sent");
       form.reset();
-      setTimeout(() => setStatus("idle"), 4000);
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error(err);
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Failed to send. Please try again.");
     }
-  }
+  };
 
-  const contacts = [
-    { icon: Mail, label: "Email", value: "praisealadesuyi@gmail.com", href: "mailto:praisealadesuyi@gmail.com" },
-    { icon: Phone, label: "Phone", value: "+234 903 764 4116", href: "tel:+2349037644116" },
-    { icon: MapPin, label: "Location", value: "Ibadan, Oyo State, Nigeria" },
-  ];
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 py-24">
-      <SectionHeader eyebrow="Contact" title="Let's build something meaningful." subtitle="Have a dataset that needs a story, or a product that needs shipping? Say hello." />
-      <div className="mt-14 grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-        <div className="glass rounded-3xl p-8">
-          <h3 className="text-lg font-semibold">Get in touch</h3>
-          <ul className="mt-6 space-y-4">
-            {contacts.map(({ icon: Icon, label, value, href }) => (
-              <li key={label} className="flex items-start gap-3">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl glass"><Icon className="h-4 w-4 text-[color:var(--cyan)]" /></span>
-                <div className="min-w-0">
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">{label}</div>
-                  {href ? <a href={href} className="text-sm hover:text-[color:var(--cyan)] break-all">{value}</a> : <div className="text-sm">{value}</div>}
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 flex gap-2">
-            <SocialLink href="https://www.linkedin.com/in/aladesuyi-kolade-957b70189" label="LinkedIn"><Linkedin className="h-4 w-4" /></SocialLink>
-            <SocialLink href="https://github.com/Aladesuyi20" label="GitHub"><Github className="h-4 w-4" /></SocialLink>
-            <SocialLink href="https://x.com/codewithperry" label="X"><Twitter className="h-4 w-4" /></SocialLink>
+    <section id="contact" className="py-24 md:py-32 bg-[color:var(--ink)] text-white">
+      <div className="container-x grid md:grid-cols-2 gap-16">
+        <div>
+          <span className="eyebrow">Get in touch</span>
+          <h2 className="mt-4 font-display text-5xl md:text-6xl leading-[0.95] text-white">
+            Ready to<br />train with us?
+          </h2>
+          <p className="mt-6 text-white/70 max-w-md leading-relaxed">
+            Book a free intro session and we'll walk you through the floor, meet
+            your coach, and design a plan around your goals.
+          </p>
+          <div className="mt-10 space-y-5">
+            <a href="mailto:praisealadesuyi@gmail.com" className="flex items-center gap-4 group">
+              <div className="grid place-items-center w-12 h-12 border border-white/20 group-hover:bg-[color:var(--blaze)] group-hover:border-[color:var(--blaze)] transition">
+                <Mail size={18} />
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/50">Email</div>
+                <div className="text-white">praisealadesuyi@gmail.com</div>
+              </div>
+            </a>
+            <a href="tel:+2340000000000" className="flex items-center gap-4 group">
+              <div className="grid place-items-center w-12 h-12 border border-white/20 group-hover:bg-[color:var(--blaze)] group-hover:border-[color:var(--blaze)] transition">
+                <Phone size={18} />
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/50">Phone</div>
+                <div className="text-white">+234 000 000 0000</div>
+              </div>
+            </a>
+            <div className="flex items-center gap-4">
+              <div className="grid place-items-center w-12 h-12 border border-white/20">
+                <MapPin size={18} />
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/50">Studio</div>
+                <div className="text-white">Ibadan, Nigeria</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <form onSubmit={onSubmit} className="glass rounded-3xl p-8">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Name" name="name" placeholder="Your full name" required />
-            <Field label="Email" name="email" type="email" placeholder="you@company.com" required />
+        <form onSubmit={onSubmit} className="space-y-5">
+          <div className="grid md:grid-cols-2 gap-5">
+            <Field name="name" label="Name" required />
+            <Field name="email" label="Email" type="email" required />
           </div>
-          <Field label="Subject" name="subject" placeholder="What's this about?" className="mt-4" />
-          <div className="mt-4">
-            <label className="text-xs uppercase tracking-widest text-muted-foreground">Message</label>
-            <textarea required rows={5} name="message" placeholder="Tell me a bit about the project..." className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm outline-none focus:border-[color:var(--cyan)]/60 focus:ring-2 focus:ring-[color:var(--cyan)]/20 transition" />
+          <Field name="subject" label="Subject" />
+          <div>
+            <label className="text-xs uppercase tracking-widest text-white/60">Message</label>
+            <textarea
+              name="message"
+              required
+              rows={5}
+              className="mt-2 w-full bg-transparent border-b border-white/30 focus:border-[color:var(--blaze)] outline-none py-3 text-white resize-none"
+            />
           </div>
-          <button type="submit" disabled={status === "sending"} className="mt-6 inline-flex items-center gap-2 rounded-xl btn-primary-grad px-5 py-3 text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed">
-            {status === "sending" && "Sending..."}
-            {status === "sent" && "Message sent ✓"}
-            {status === "error" && "Try again"}
-            {status === "idle" && (<>Send message <Send className="h-4 w-4" /></>)}
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="btn-primary w-full justify-center disabled:opacity-60"
+          >
+            {status === "sending" ? "Sending..." : status === "sent" ? "Message sent ✓" : "Send message"}
+            {status !== "sent" && status !== "sending" && <Send size={16} />}
           </button>
           {status === "error" && (
-            <p className="mt-3 text-sm text-red-400">{errorMsg}</p>
+            <p className="text-sm text-[color:var(--blaze)]">Something went wrong. Please try again or email us directly.</p>
           )}
           {status === "sent" && (
-            <p className="mt-3 text-sm text-[color:var(--cyan)]">Thanks! I'll get back to you soon.</p>
+            <p className="text-sm text-green-400">Thanks! We'll be in touch within 24 hours.</p>
           )}
         </form>
       </div>
@@ -588,45 +556,62 @@ function Contact() {
   );
 }
 
-
-function Field({ label, className = "", ...props }: { label: string; className?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+function Field({ name, label, type = "text", required = false }: { name: string; label: string; type?: string; required?: boolean }) {
   return (
-    <div className={className}>
-      <label className="text-xs uppercase tracking-widest text-muted-foreground">{label}</label>
-      <input required {...props} className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm outline-none focus:border-[color:var(--cyan)]/60 focus:ring-2 focus:ring-[color:var(--cyan)]/20 transition" />
+    <div>
+      <label className="text-xs uppercase tracking-widest text-white/60">{label}</label>
+      <input
+        name={name}
+        type={type}
+        required={required}
+        className="mt-2 w-full bg-transparent border-b border-white/30 focus:border-[color:var(--blaze)] outline-none py-3 text-white"
+      />
     </div>
-  );
-}
-
-function SocialLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
-  return (
-    <a href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center rounded-xl glass hover:bg-white/10 hover:-translate-y-0.5 transition">{children}</a>
   );
 }
 
 function Footer() {
   return (
-    <footer className="border-t border-white/5 mt-10">
-      <div className="mx-auto max-w-6xl px-4 py-10">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="flex items-center gap-2 font-display font-bold">
-            <span className="grid h-8 w-8 place-items-center rounded-lg btn-primary-grad text-sm">A</span>
-            aladesuyikolade.dev
+    <footer className="bg-black text-white/70 py-16">
+      <div className="container-x grid md:grid-cols-4 gap-10">
+        <div className="md:col-span-2">
+          <div className="flex items-center gap-2">
+            <div className="grid place-items-center w-9 h-9 bg-white text-black font-display text-lg">P</div>
+            <span className="font-display text-xl tracking-widest text-white">
+              PULSE<span className="text-[color:var(--blaze)]">GYM</span>
+            </span>
           </div>
-          <nav className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
-            {nav.map((n) => (
-              <a key={n.href} href={n.href} className="hover:text-foreground transition">{n.label}</a>
+          <p className="mt-6 max-w-md text-sm leading-relaxed">
+            A premium personal-training studio in Ibadan. Fitness · Strength · Lifestyle.
+          </p>
+          <div className="mt-6 flex gap-3">
+            {[Instagram, Facebook, Youtube].map((Icon, i) => (
+              <a key={i} href="#" className="grid place-items-center w-10 h-10 border border-white/20 hover:bg-[color:var(--blaze)] hover:border-[color:var(--blaze)] transition">
+                <Icon size={16} />
+              </a>
             ))}
-          </nav>
-          <div className="flex gap-2">
-            <SocialLink href="https://www.linkedin.com/in/aladesuyi-kolade-957b70189" label="LinkedIn"><Linkedin className="h-4 w-4" /></SocialLink>
-            <SocialLink href="https://github.com/Aladesuyi20" label="GitHub"><Github className="h-4 w-4" /></SocialLink>
-            <SocialLink href="https://x.com/codewithperry" label="X"><Twitter className="h-4 w-4" /></SocialLink>
           </div>
         </div>
-        <p className="mt-8 text-center text-xs text-muted-foreground">
-          Designed & Built by <span className="gradient-text font-semibold">ALADESUYI PRAISE KOLADE</span> © 2026
-        </p>
+        <div>
+          <div className="font-display text-white tracking-widest mb-4">Explore</div>
+          <ul className="space-y-2 text-sm">
+            {nav.map((n) => (
+              <li key={n.href}><a href={n.href} className="hover:text-white transition">{n.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div className="font-display text-white tracking-widest mb-4">Hours</div>
+          <ul className="space-y-2 text-sm">
+            <li>Mon–Fri · 5:30am–10pm</li>
+            <li>Sat · 7am–8pm</li>
+            <li>Sun · 8am–4pm</li>
+          </ul>
+        </div>
+      </div>
+      <div className="container-x mt-12 pt-6 border-t border-white/10 text-xs flex flex-col md:flex-row justify-between gap-3">
+        <span>© {new Date().getFullYear()} PulseGym. All rights reserved.</span>
+        <span>Built with strength in Ibadan.</span>
       </div>
     </footer>
   );
