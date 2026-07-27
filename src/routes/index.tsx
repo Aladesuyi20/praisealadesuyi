@@ -7,6 +7,7 @@ import {
   Users, Activity, Send, Quote, Check, ChevronRight,
 } from "lucide-react";
 import NeuralBody from "@/components/NeuralBody";
+import neuralBodyImg from "@/assets/neural-body.jpg";
 import classesImg from "@/assets/gym-classes.jpg";
 import personalImg from "@/assets/gym-personal.jpg";
 import rehabImg from "@/assets/gym-rehab.jpg";
@@ -129,6 +130,18 @@ function Hero() {
   return (
     <section id="home" className="relative h-[100svh] w-full overflow-hidden bg-black">
       <NeuralBody />
+      <div
+        className="absolute inset-0 pointer-events-none flex items-center justify-center md:justify-end md:pr-[6%] animate-rise"
+        aria-hidden="true"
+      >
+        <img
+          src={neuralBodyImg}
+          alt=""
+          width={1024}
+          height={1536}
+          className="h-[95%] w-auto object-contain opacity-90 mix-blend-screen drop-shadow-[0_0_60px_rgba(230,57,70,0.55)]"
+        />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/85 pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.75)_85%)] pointer-events-none" />
       <div className="relative z-10 h-full container-x flex flex-col justify-end pb-24 pt-32">
