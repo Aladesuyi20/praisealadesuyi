@@ -10,9 +10,12 @@ import heroImg from "@/assets/hero-gym.jpg";
 import classesImg from "@/assets/gym-classes.jpg";
 import personalImg from "@/assets/gym-personal.jpg";
 import rehabImg from "@/assets/gym-rehab.jpg";
-import trainer1 from "@/assets/trainer-1.jpg";
-import trainer2 from "@/assets/trainer-2.jpg";
-import trainer3 from "@/assets/trainer-3.jpg";
+import trainer1Asset from "@/assets/aladesuyi-marvellous.jpg.asset.json";
+import trainer2Asset from "@/assets/ayodele-esther.jpg.asset.json";
+import trainer3Asset from "@/assets/godwin-john.jpg.asset.json";
+const trainer1 = trainer1Asset.url;
+const trainer2 = trainer2Asset.url;
+const trainer3 = trainer3Asset.url;
 
 const EMAILJS_SERVICE_ID = "service_liri6br";
 const EMAILJS_TEMPLATE_ID = "template_gg2mx7f";
