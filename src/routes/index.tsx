@@ -491,22 +491,22 @@ function Contact() {
             your coach, and design a plan around your goals.
           </p>
           <div className="mt-10 space-y-5">
-            <a href="mailto:praisealadesuyi@gmail.com" className="flex items-center gap-4 group">
+            <a href="mailto:oemma5422@gmail.com" className="flex items-center gap-4 group">
               <div className="grid place-items-center w-12 h-12 border border-white/20 group-hover:bg-[color:var(--blaze)] group-hover:border-[color:var(--blaze)] transition">
                 <Mail size={18} />
               </div>
               <div>
                 <div className="text-xs uppercase tracking-widest text-white/50">Email</div>
-                <div className="text-white">praisealadesuyi@gmail.com</div>
+                <div className="text-white">oemma5422@gmail.com</div>
               </div>
             </a>
-            <a href="tel:+2340000000000" className="flex items-center gap-4 group">
+            <a href="tel:+2347088118226" className="flex items-center gap-4 group">
               <div className="grid place-items-center w-12 h-12 border border-white/20 group-hover:bg-[color:var(--blaze)] group-hover:border-[color:var(--blaze)] transition">
                 <Phone size={18} />
               </div>
               <div>
                 <div className="text-xs uppercase tracking-widest text-white/50">Phone</div>
-                <div className="text-white">+234 000 000 0000</div>
+                <div className="text-white">+234 708 811 8226</div>
               </div>
             </a>
             <div className="flex items-center gap-4">
