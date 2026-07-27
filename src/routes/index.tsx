@@ -6,7 +6,7 @@ import {
   Instagram, Facebook, Youtube, Dumbbell, HeartPulse,
   Users, Activity, Send, Quote, Check, ChevronRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero-gym.jpg";
+import NeuralBody from "@/components/NeuralBody";
 import classesImg from "@/assets/gym-classes.jpg";
 import personalImg from "@/assets/gym-personal.jpg";
 import rehabImg from "@/assets/gym-rehab.jpg";
@@ -127,15 +127,10 @@ function PulseGym() {
 
 function Hero() {
   return (
-    <section id="home" className="relative h-[100svh] w-full overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Athlete lifting barbell"
-        className="absolute inset-0 h-full w-full object-cover"
-        width={1920}
-        height={1280}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+    <section id="home" className="relative h-[100svh] w-full overflow-hidden bg-black">
+      <NeuralBody />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/85 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.75)_85%)] pointer-events-none" />
       <div className="relative z-10 h-full container-x flex flex-col justify-end pb-24 pt-32">
         <div className="max-w-4xl animate-rise">
           <span className="eyebrow text-white/80">Fitness · Strength · Lifestyle</span>
