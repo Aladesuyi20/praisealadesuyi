@@ -311,9 +311,9 @@ function Training() {
 
 function Team() {
   const trainers = [
-    { name: "Marcus Ade", role: "Head Strength Coach", img: trainer1, tags: ["Powerlifting", "Barbell"] },
-    { name: "Zainab Okafor", role: "Performance Coach", img: trainer2, tags: ["Conditioning", "Women's Health"] },
-    { name: "Tobi Ekundayo", role: "Movement Specialist", img: trainer3, tags: ["Mobility", "Rehab"] },
+    { name: "Aladesuyi Marvellous", role: "Head Strength Coach", img: trainer1, tags: ["Powerlifting", "Barbell"] },
+    { name: "Ayodele Esther", role: "Performance Coach", img: trainer2, tags: ["Conditioning", "Women's Health"] },
+    { name: "Godwin John", role: "Movement Specialist", img: trainer3, tags: ["Mobility", "Rehab"] },
   ];
   return (
     <section id="team" className="py-24 md:py-32 bg-background">
