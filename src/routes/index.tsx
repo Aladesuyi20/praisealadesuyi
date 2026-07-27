@@ -6,7 +6,7 @@ import {
   Instagram, Facebook, Youtube, Dumbbell, HeartPulse,
   Users, Activity, Send, Quote, Check, ChevronRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero-gym.jpg";
+import NeuralBody from "@/components/NeuralBody";
 import classesImg from "@/assets/gym-classes.jpg";
 import personalImg from "@/assets/gym-personal.jpg";
 import rehabImg from "@/assets/gym-rehab.jpg";
