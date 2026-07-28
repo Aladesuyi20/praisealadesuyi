@@ -153,9 +153,9 @@ function Hero() {
             that gets you real results.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <a href="#contact" className="btn-primary">
+            <Link to="/auth" className="btn-primary">
               Book a trial <ArrowRight size={16} />
-            </a>
+            </Link>
             <a href="#training" className="btn-ghost">Explore programs</a>
           </div>
         </div>
