@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import {
@@ -78,9 +78,9 @@ function PulseGym() {
                 {n.label.toUpperCase()}
               </a>
             ))}
-            <a href="#contact" className="btn-primary text-xs">
+            <Link to="/auth" className="btn-primary text-xs">
               Join Now <ArrowRight size={14} />
-            </a>
+            </Link>
           </nav>
           <button
             className={`md:hidden ${scrolled ? "text-[color:var(--ink)]" : "text-white"}`}
@@ -103,9 +103,9 @@ function PulseGym() {
                   {n.label.toUpperCase()}
                 </a>
               ))}
-              <a href="#contact" onClick={() => setOpen(false)} className="btn-primary self-start">
+              <Link to="/auth" onClick={() => setOpen(false)} className="btn-primary self-start">
                 Join Now
-              </a>
+              </Link>
             </div>
           </div>
         )}
