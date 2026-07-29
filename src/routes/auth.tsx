@@ -93,7 +93,7 @@ function AuthPage() {
               full_name: fullName,
               age: age ? Number(age) : null,
               gender,
-              fitness_goal: goal,
+              fitness_goal: goal ? `${goal} · Plan: ${selectedPlan}` : `Plan: ${selectedPlan}`,
               doctor_name: doctorName,
               doctor_email: doctorEmail || undefined,
             },
