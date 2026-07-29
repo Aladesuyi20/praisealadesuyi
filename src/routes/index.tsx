@@ -237,9 +237,9 @@ function About() {
 
 function Offer() {
   const cards = [
-    { title: "Personal Training", copy: "1-on-1 coaching built around your body, your goals, your schedule.", img: personalImg, tag: "Most popular" },
-    { title: "Group Classes", copy: "High-energy small-group sessions — kettlebell, HIIT, mobility.", img: classesImg },
-    { title: "Rehab & Recovery", copy: "Physio-led recovery to get you back stronger than before.", img: rehabImg },
+    { title: "Personal Training", copy: "1-on-1 coaching built around your body, your goals, your schedule.", img: personalImg, tag: "Most popular", slug: "personal-training" },
+    { title: "Group Classes", copy: "High-energy small-group sessions — kettlebell, HIIT, mobility.", img: classesImg, slug: "group-classes" },
+    { title: "Rehab & Recovery", copy: "Physio-led recovery to get you back stronger than before.", img: rehabImg, slug: "rehab-recovery" },
   ];
   return (
     <section id="classes" className="py-24 md:py-32 bg-[color:var(--bone)]">
@@ -257,9 +257,11 @@ function Offer() {
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {cards.map((c) => (
-            <article
+            <Link
+              to="/programs/$slug"
+              params={{ slug: c.slug }}
               key={c.title}
-              className="group relative overflow-hidden bg-white aspect-[3/4] cursor-pointer"
+              className="group relative overflow-hidden bg-white aspect-[3/4] cursor-pointer block"
             >
               <img
                 src={c.img}
@@ -280,13 +282,19 @@ function Offer() {
                   Learn more <ArrowRight size={14} />
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
+        </div>
+
+        {/* Free consultation glowing card */}
+        <div className="mt-10">
+          <FreeConsultCard />
         </div>
       </div>
     </section>
   );
 }
+
 
 function Training() {
   const pillars = [
