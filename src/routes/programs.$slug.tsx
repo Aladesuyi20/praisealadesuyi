@@ -192,7 +192,7 @@ export const Route = createFileRoute("/programs/$slug")({
 });
 
 function ProgramPage() {
-  const { program: p } = Route.useLoaderData();
+  const { program: p } = Route.useLoaderData() as { program: Program };
   return (
     <main className="min-h-screen bg-[color:var(--bone)] text-[color:var(--ink)]">
       {/* Header */}
