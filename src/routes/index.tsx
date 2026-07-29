@@ -136,8 +136,10 @@ function Hero() {
         playsInline
         preload="auto"
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover object-center opacity-90"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-90 scale-125"
       />
+      {/* mask over bottom-right Pika watermark, in case scale doesn't fully crop it */}
+      <div className="absolute bottom-0 right-0 h-16 w-40 bg-black pointer-events-none z-[1]" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/90 pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(0,0,0,0.8)_90%)] pointer-events-none" />
       <div className="relative z-10 h-full container-x flex flex-col justify-end pb-24 pt-32">
