@@ -188,6 +188,32 @@ function AuthPage() {
                 />
                 <Field label="Doctor's name" value={doctorName} onChange={setDoctorName} />
                 <Field label="Doctor's email" type="email" value={doctorEmail} onChange={setDoctorEmail} />
+                <div>
+                  <span className="text-xs font-display tracking-widest text-black/60">MEMBERSHIP PLAN</span>
+                  <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    {PLANS.map((p) => {
+                      const active = selectedPlan === p.name;
+                      return (
+                        <button
+                          type="button"
+                          key={p.name}
+                          onClick={() => setSelectedPlan(p.name)}
+                          className={`text-left border p-3 transition ${
+                            active
+                              ? "border-[color:var(--ink)] bg-[color:var(--ink)] text-white"
+                              : "border-black/20 hover:border-[color:var(--ink)]"
+                          }`}
+                        >
+                          <div className="font-display text-sm">{p.name}</div>
+                          <div className="font-display text-lg mt-1">{p.price}</div>
+                          <div className={`text-[10px] uppercase tracking-widest ${active ? "text-white/60" : "text-black/50"}`}>
+                            {p.per}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </>
             )}
             <Field label="Email" type="email" value={email} onChange={setEmail} required />
