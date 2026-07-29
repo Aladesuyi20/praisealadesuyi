@@ -6,8 +6,18 @@ import { upsertProfile } from "@/lib/profile.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { ArrowLeft, Loader2 } from "lucide-react";
 
+const PLANS = [
+  { name: "Drop-in", price: "₦8,000", per: "single session" },
+  { name: "Monthly", price: "₦45,000", per: "per month" },
+  { name: "PT Pro", price: "₦120,000", per: "per month" },
+] as const;
+type PlanName = typeof PLANS[number]["name"];
+
 export const Route = createFileRoute("/auth")({
   ssr: false,
+  validateSearch: (search: Record<string, unknown>) => ({
+    plan: (typeof search.plan === "string" ? search.plan : undefined) as PlanName | undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Join PulseGym — Sign up or Log in" },
