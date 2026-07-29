@@ -30,6 +30,7 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const upsert = useServerFn(upsertProfile);
+  const { plan: initialPlan } = Route.useSearch();
   const [mode, setMode] = useState<"signup" | "login">("signup");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -49,6 +50,9 @@ function AuthPage() {
   const [goal, setGoal] = useState("");
   const [doctorName, setDoctorName] = useState("");
   const [doctorEmail, setDoctorEmail] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState<PlanName>(
+    (PLANS.find((p) => p.name === initialPlan)?.name) ?? "Monthly",
+  );
 
   async function handleGoogle() {
     setError(null);
