@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
 import { Route as AuthenticatedMemberRouteImport } from './routes/_authenticated/member'
 
 const AuthRoute = AuthRouteImport.update({
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgramsSlugRoute = ProgramsSlugRouteImport.update({
+  id: '/programs/$slug',
+  path: '/programs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedMemberRoute = AuthenticatedMemberRouteImport.update({
   id: '/member',
   path: '/member',
@@ -38,11 +44,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/member': typeof AuthenticatedMemberRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/member': typeof AuthenticatedMemberRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -50,19 +58,27 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/member': typeof AuthenticatedMemberRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/member'
+  fullPaths: '/' | '/auth' | '/member' | '/programs/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/member'
-  id: '__root__' | '/' | '/_authenticated' | '/auth' | '/_authenticated/member'
+  to: '/' | '/auth' | '/member' | '/programs/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/member'
+    | '/programs/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ProgramsSlugRoute: typeof ProgramsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -86,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs/$slug': {
+      id: '/programs/$slug'
+      path: '/programs/$slug'
+      fullPath: '/programs/$slug'
+      preLoaderRoute: typeof ProgramsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/member': {
@@ -113,6 +136,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ProgramsSlugRoute: ProgramsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
