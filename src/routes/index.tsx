@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { FreeConsultCard } from "./programs.$slug";
 import { useEffect, useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import {
