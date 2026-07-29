@@ -6,8 +6,18 @@ import { upsertProfile } from "@/lib/profile.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { ArrowLeft, Loader2 } from "lucide-react";
 
+const PLANS = [
+  { name: "Drop-in", price: "₦8,000", per: "single session" },
+  { name: "Monthly", price: "₦45,000", per: "per month" },
+  { name: "PT Pro", price: "₦120,000", per: "per month" },
+] as const;
+type PlanName = typeof PLANS[number]["name"];
+
 export const Route = createFileRoute("/auth")({
   ssr: false,
+  validateSearch: (search: Record<string, unknown>) => ({
+    plan: (typeof search.plan === "string" ? search.plan : undefined) as PlanName | undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Join PulseGym — Sign up or Log in" },
@@ -20,6 +30,7 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const upsert = useServerFn(upsertProfile);
+  const { plan: initialPlan } = Route.useSearch();
   const [mode, setMode] = useState<"signup" | "login">("signup");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +50,9 @@ function AuthPage() {
   const [goal, setGoal] = useState("");
   const [doctorName, setDoctorName] = useState("");
   const [doctorEmail, setDoctorEmail] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState<PlanName>(
+    (PLANS.find((p) => p.name === initialPlan)?.name) ?? "Monthly",
+  );
 
   async function handleGoogle() {
     setError(null);
@@ -79,7 +93,7 @@ function AuthPage() {
               full_name: fullName,
               age: age ? Number(age) : null,
               gender,
-              fitness_goal: goal,
+              fitness_goal: goal ? `${goal} · Plan: ${selectedPlan}` : `Plan: ${selectedPlan}`,
               doctor_name: doctorName,
               doctor_email: doctorEmail || undefined,
             },
@@ -174,6 +188,32 @@ function AuthPage() {
                 />
                 <Field label="Doctor's name" value={doctorName} onChange={setDoctorName} />
                 <Field label="Doctor's email" type="email" value={doctorEmail} onChange={setDoctorEmail} />
+                <div>
+                  <span className="text-xs font-display tracking-widest text-black/60">MEMBERSHIP PLAN</span>
+                  <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    {PLANS.map((p) => {
+                      const active = selectedPlan === p.name;
+                      return (
+                        <button
+                          type="button"
+                          key={p.name}
+                          onClick={() => setSelectedPlan(p.name)}
+                          className={`text-left border p-3 transition ${
+                            active
+                              ? "border-[color:var(--ink)] bg-[color:var(--ink)] text-white"
+                              : "border-black/20 hover:border-[color:var(--ink)]"
+                          }`}
+                        >
+                          <div className="font-display text-sm">{p.name}</div>
+                          <div className="font-display text-lg mt-1">{p.price}</div>
+                          <div className={`text-[10px] uppercase tracking-widest ${active ? "text-white/60" : "text-black/50"}`}>
+                            {p.per}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </>
             )}
             <Field label="Email" type="email" value={email} onChange={setEmail} required />
