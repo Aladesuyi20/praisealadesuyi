@@ -411,14 +411,15 @@ function Pricing() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="#contact"
+              <Link
+                to="/auth"
+                search={{ plan: p.name }}
                 className={`mt-10 inline-flex items-center justify-center gap-2 py-4 font-display tracking-widest text-xs transition ${
                   p.featured ? "bg-[color:var(--blaze)] text-white hover:bg-white hover:text-[color:var(--ink)]" : "bg-[color:var(--ink)] text-white hover:bg-[color:var(--blaze)]"
                 }`}
               >
                 Choose {p.name} <ArrowRight size={14} />
-              </a>
+              </Link>
             </div>
           ))}
         </div>
