@@ -3,9 +3,21 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 const COACHES = [
-  { key: "Aladesuyi Marvellous", role: "Head Strength Coach", focus: "Strength, hypertrophy, powerlifting, athletic base building." },
-  { key: "Ayodele Esther", role: "Performance Coach", focus: "Conditioning, weight loss, women's training, HIIT & metabolic work." },
-  { key: "Godwin John", role: "Movement Specialist", focus: "Mobility, rehab, injury recovery, corrective exercise, posture." },
+  {
+    key: "Aladesuyi Marvellous",
+    role: "Head Strength Coach",
+    focus: "Strength, hypertrophy, powerlifting, athletic base building.",
+  },
+  {
+    key: "Ayodele Esther",
+    role: "Performance Coach",
+    focus: "Conditioning, weight loss, women's training, HIIT & metabolic work.",
+  },
+  {
+    key: "Godwin John",
+    role: "Movement Specialist",
+    focus: "Mobility, rehab, injury recovery, corrective exercise, posture.",
+  },
 ];
 
 // ---------- Threads ----------
@@ -137,7 +149,7 @@ Always respond as STRICT JSON — no prose outside the JSON — with this exact 
   "reply": "your markdown-friendly answer to the member",
   "isHealthFlag": boolean,
   "healthSummary": "one short paragraph the doctor should see, only if isHealthFlag is true, else empty string",
-  "recommendedCoach": "exactly one of ${COACHES.map((c) => `\"${c.key}\"`).join(", ")}, or null if no recommendation this turn"
+  "recommendedCoach": "exactly one of ${COACHES.map((c) => `"${c.key}"`).join(", ")}, or null if no recommendation this turn"
 }`;
 
     const messages = [

@@ -5,11 +5,24 @@ import { supabase } from "@/integrations/supabase/client";
 import emailjs from "@emailjs/browser";
 import ReactMarkdown from "react-markdown";
 import {
-  Plus, Trash2, Send, Loader2, LogOut, AlertTriangle, ShieldCheck, MessageSquare, ArrowLeft, Star,
+  Plus,
+  Trash2,
+  Send,
+  Loader2,
+  LogOut,
+  AlertTriangle,
+  ShieldCheck,
+  MessageSquare,
+  ArrowLeft,
+  Star,
 } from "lucide-react";
 import { getProfile } from "@/lib/profile.functions";
 import {
-  listThreads, createThread, deleteThread, getThreadMessages, sendChat,
+  listThreads,
+  createThread,
+  deleteThread,
+  getThreadMessages,
+  sendChat,
 } from "@/lib/chat.functions";
 import trainer1Asset from "@/assets/aladesuyi-marvellous.jpg.asset.json";
 import trainer2Asset from "@/assets/ayodele-esther.jpg.asset.json";
@@ -21,15 +34,21 @@ const EMAILJS_PUBLIC_KEY = "nAsHaQs96w0LPCaSM";
 
 const COACHES = [
   {
-    key: "Aladesuyi Marvellous", role: "Head Strength Coach", img: trainer1Asset.url,
+    key: "Aladesuyi Marvellous",
+    role: "Head Strength Coach",
+    img: trainer1Asset.url,
     bio: "Strength, hypertrophy and powerlifting. Builds the raw force behind every serious athlete.",
   },
   {
-    key: "Ayodele Esther", role: "Performance Coach", img: trainer2Asset.url,
+    key: "Ayodele Esther",
+    role: "Performance Coach",
+    img: trainer2Asset.url,
     bio: "Conditioning, fat loss, women's training and metabolic work. Turns effort into visible results.",
   },
   {
-    key: "Godwin John", role: "Movement Specialist", img: trainer3Asset.url,
+    key: "Godwin John",
+    role: "Movement Specialist",
+    img: trainer3Asset.url,
     bio: "Mobility, rehab, corrective exercise and injury recovery. Keeps you training pain-free for decades.",
   },
 ];
@@ -38,14 +57,23 @@ export const Route = createFileRoute("/_authenticated/member")({
   head: () => ({
     meta: [
       { title: "Member Area — PulseGym" },
-      { name: "description", content: "Your PulseGym member dashboard, coach recommendations, and AI health coach." },
+      {
+        name: "description",
+        content: "Your PulseGym member dashboard, coach recommendations, and AI health coach.",
+      },
     ],
   }),
   component: MemberPage,
 });
 
 type Thread = { id: string; title: string; updated_at: string };
-type Message = { id: string; role: string; content: string; is_health_flag: boolean; created_at: string };
+type Message = {
+  id: string;
+  role: string;
+  content: string;
+  is_health_flag: boolean;
+  created_at: string;
+};
 
 function MemberPage() {
   const navigate = useNavigate();
@@ -204,12 +232,17 @@ ${lastHealthSummary || assistantContent}
             <Link to="/" className="text-black/60 hover:text-black">
               <ArrowLeft size={18} />
             </Link>
-            <div className="grid place-items-center w-9 h-9 bg-[color:var(--ink)] text-white font-display">P</div>
+            <div className="grid place-items-center w-9 h-9 bg-[color:var(--ink)] text-white font-display">
+              P
+            </div>
             <span className="font-display text-lg tracking-widest">
               PULSE<span className="text-[color:var(--blaze)]">GYM</span> · MEMBERS
             </span>
           </div>
-          <button onClick={handleSignOut} className="inline-flex items-center gap-2 text-sm hover:text-[color:var(--blaze)]">
+          <button
+            onClick={handleSignOut}
+            className="inline-flex items-center gap-2 text-sm hover:text-[color:var(--blaze)]"
+          >
             <LogOut size={16} /> Sign out
           </button>
         </div>
@@ -221,7 +254,8 @@ ${lastHealthSummary || assistantContent}
           Hey {profile?.full_name || "athlete"}.
         </h1>
         <p className="mt-2 text-black/70 max-w-2xl">
-          Your goal: <strong>{profile?.fitness_goal || "not set yet"}</strong>. Chat with our AI health coach below — it knows your profile and will suggest the best coach for you.
+          Your goal: <strong>{profile?.fitness_goal || "not set yet"}</strong>. Chat with our AI
+          health coach below — it knows your profile and will suggest the best coach for you.
         </p>
       </section>
 
@@ -245,7 +279,9 @@ ${lastHealthSummary || assistantContent}
                   <img src={c.img} alt={c.key} className="w-full h-full object-cover" />
                 </div>
                 <h3 className="font-display text-xl">{c.key}</h3>
-                <p className="text-xs font-display tracking-widest text-[color:var(--blaze)] mt-1">{c.role.toUpperCase()}</p>
+                <p className="text-xs font-display tracking-widest text-[color:var(--blaze)] mt-1">
+                  {c.role.toUpperCase()}
+                </p>
                 <p className="text-sm text-black/70 mt-2 leading-relaxed">{c.bio}</p>
               </article>
             );
@@ -278,7 +314,10 @@ ${lastHealthSummary || assistantContent}
                 >
                   <span className="truncate flex-1">{t.title}</span>
                   <button
-                    onClick={(e) => { e.stopPropagation(); void handleDelete(t.id); }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      void handleDelete(t.id);
+                    }}
                     className="opacity-0 group-hover:opacity-100 text-current/70 hover:text-[color:var(--blaze)]"
                     aria-label="Delete conversation"
                   >
@@ -298,7 +337,10 @@ ${lastHealthSummary || assistantContent}
                 </div>
               )}
               {messages.map((m) => (
-                <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div
+                  key={m.id}
+                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+                >
                   <div
                     className={`max-w-[85%] px-4 py-3 text-sm leading-relaxed ${
                       m.role === "user"

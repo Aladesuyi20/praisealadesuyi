@@ -78,21 +78,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "PulseGym — Fitness · Strength · Lifestyle" },
-      { name: "description", content: "PulseGym is a premium personal-training studio in Ibadan. Strength, conditioning, rehab, and coaching that transforms bodies and mindsets." },
+      {
+        name: "description",
+        content:
+          "PulseGym is a premium personal-training studio in Ibadan. Strength, conditioning, rehab, and coaching that transforms bodies and mindsets.",
+      },
       { name: "author", content: "PulseGym" },
       { property: "og:title", content: "PulseGym — Fitness · Strength · Lifestyle" },
-      { property: "og:description", content: "Premium personal-training studio. Strength, conditioning, rehab, and coaching built to transform." },
+      {
+        property: "og:description",
+        content:
+          "Premium personal-training studio. Strength, conditioning, rehab, and coaching built to transform.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "PulseGym — Fitness · Strength · Lifestyle" },
-      { name: "twitter:description", content: "Premium personal-training studio. Strength, conditioning, rehab, and coaching built to transform." },
+      {
+        name: "twitter:description",
+        content:
+          "Premium personal-training studio. Strength, conditioning, rehab, and coaching built to transform.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,

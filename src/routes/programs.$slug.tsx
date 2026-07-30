@@ -1,8 +1,25 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import type { LucideIcon } from "lucide-react";
 import {
-  ArrowLeft, ArrowRight, CheckCircle2, Flame, Target, Salad, Wrench,
-  LineChart, Sparkles, Users, Music2, Repeat, HeartHandshake, Trophy,
-  Stethoscope, Activity, ShieldCheck, HandHeart, Dumbbell,
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  Flame,
+  Target,
+  Salad,
+  Wrench,
+  LineChart,
+  Sparkles,
+  Users,
+  Music2,
+  Repeat,
+  HeartHandshake,
+  Trophy,
+  Stethoscope,
+  Activity,
+  ShieldCheck,
+  HandHeart,
+  Dumbbell,
 } from "lucide-react";
 import classesImg from "@/assets/gym-classes.jpg";
 import personalImg from "@/assets/gym-personal.jpg";
@@ -18,10 +35,10 @@ type Program = {
   audienceTitle: string;
   audience: string[];
   featuresTitle: string;
-  features: { icon: any; title: string; copy: string }[];
+  features: { icon: LucideIcon; title: string; copy: string }[];
   whyTitle: string;
   whyCopy: string;
-  bullets?: { icon: any; text: string }[];
+  bullets?: { icon: LucideIcon; text: string }[];
   resultsTitle?: string;
   results?: string[];
   ctaLabel: string;
@@ -52,23 +69,46 @@ const PROGRAMS: Record<string, Program> = {
     ],
     featuresTitle: "What you'll receive",
     features: [
-      { icon: Target, title: "Personalized Training Plan", copy: "Your coach designs a program specifically for your goals, experience level, and fitness assessment." },
-      { icon: Salad, title: "Nutrition Guidance", copy: "Training is only part of the equation. Get practical nutrition advice that supports your transformation." },
-      { icon: Wrench, title: "Technique Correction", copy: "Proper form maximises results and slashes injury risk. We watch every rep." },
-      { icon: LineChart, title: "Progress Tracking", copy: "Every milestone measured — strength, endurance, body composition, and overall fitness." },
-      { icon: Flame, title: "Continuous Motivation", copy: "Your coach keeps you accountable, adjusts the plan when needed, and keeps you consistent." },
+      {
+        icon: Target,
+        title: "Personalized Training Plan",
+        copy: "Your coach designs a program specifically for your goals, experience level, and fitness assessment.",
+      },
+      {
+        icon: Salad,
+        title: "Nutrition Guidance",
+        copy: "Training is only part of the equation. Get practical nutrition advice that supports your transformation.",
+      },
+      {
+        icon: Wrench,
+        title: "Technique Correction",
+        copy: "Proper form maximises results and slashes injury risk. We watch every rep.",
+      },
+      {
+        icon: LineChart,
+        title: "Progress Tracking",
+        copy: "Every milestone measured — strength, endurance, body composition, and overall fitness.",
+      },
+      {
+        icon: Flame,
+        title: "Continuous Motivation",
+        copy: "Your coach keeps you accountable, adjusts the plan when needed, and keeps you consistent.",
+      },
     ],
     whyTitle: "Why choose Personal Training?",
-    whyCopy: "Because your fitness journey is unique. Instead of following random workouts online, you'll have a certified coach who understands your body, monitors your progress, and keeps you focused every step of the way. Your success becomes our mission.",
+    whyCopy:
+      "Because your fitness journey is unique. Instead of following random workouts online, you'll have a certified coach who understands your body, monitors your progress, and keeps you focused every step of the way. Your success becomes our mission.",
     ctaLabel: "Book Your First Session",
     ctaHref: "/auth?plan=pt-pro",
-    closing: "Ready to transform? Invest in yourself today and experience training designed around you. 🔥",
+    closing:
+      "Ready to transform? Invest in yourself today and experience training designed around you. 🔥",
   },
   "group-classes": {
     slug: "group-classes",
     eyebrow: "Group Classes",
     title: "Sweat Together. Grow Together. 🔥",
-    tagline: "Expert coaching, energetic music, and teammates who push you harder than you'd push yourself.",
+    tagline:
+      "Expert coaching, energetic music, and teammates who push you harder than you'd push yourself.",
     hero: classesImg,
     intro: [
       "Fitness becomes more exciting when you're surrounded by people who motivate and challenge you.",
@@ -84,14 +124,35 @@ const PROGRAMS: Record<string, Program> = {
     ],
     featuresTitle: "What you'll experience",
     features: [
-      { icon: Flame, title: "High-Energy Workouts", copy: "Every class is designed to keep you moving from the first beat to the final cool-down." },
-      { icon: Users, title: "Professional Coaching", copy: "Certified instructors ensure everyone performs every movement safely and effectively." },
-      { icon: Repeat, title: "Variety Every Week", copy: "HIIT, Functional Training, Strength Circuits, Kettlebells, Mobility, Core Conditioning, Cardio. No workout ever feels repetitive." },
-      { icon: Music2, title: "An Atmosphere You'll Miss On Rest Days", copy: "Curated playlists, real coaching cues, and a room that lifts you up." },
-      { icon: HeartHandshake, title: "Real Community", copy: "Friendly competition, shared wins, and friendships that outlast the workout." },
+      {
+        icon: Flame,
+        title: "High-Energy Workouts",
+        copy: "Every class is designed to keep you moving from the first beat to the final cool-down.",
+      },
+      {
+        icon: Users,
+        title: "Professional Coaching",
+        copy: "Certified instructors ensure everyone performs every movement safely and effectively.",
+      },
+      {
+        icon: Repeat,
+        title: "Variety Every Week",
+        copy: "HIIT, Functional Training, Strength Circuits, Kettlebells, Mobility, Core Conditioning, Cardio. No workout ever feels repetitive.",
+      },
+      {
+        icon: Music2,
+        title: "An Atmosphere You'll Miss On Rest Days",
+        copy: "Curated playlists, real coaching cues, and a room that lifts you up.",
+      },
+      {
+        icon: HeartHandshake,
+        title: "Real Community",
+        copy: "Friendly competition, shared wins, and friendships that outlast the workout.",
+      },
     ],
     whyTitle: "Why members love Group Classes",
-    whyCopy: "Fun atmosphere. Increased motivation. Friendly competition. Affordable coaching. Massive calorie burn. Strong community. The energy in the room pushes everyone to work harder than they would alone.",
+    whyCopy:
+      "Fun atmosphere. Increased motivation. Friendly competition. Affordable coaching. Massive calorie burn. Strong community. The energy in the room pushes everyone to work harder than they would alone.",
     bullets: [
       { icon: CheckCircle2, text: "Fun atmosphere" },
       { icon: CheckCircle2, text: "Increased motivation" },
@@ -136,14 +197,35 @@ const PROGRAMS: Record<string, Program> = {
     ],
     featuresTitle: "Our recovery services",
     features: [
-      { icon: Stethoscope, title: "Injury Assessment", copy: "Understand the root cause of the pain before treatment begins." },
-      { icon: Dumbbell, title: "Guided Rehabilitation", copy: "Safe, progressive exercises designed to rebuild strength and mobility." },
-      { icon: Activity, title: "Mobility Improvement", copy: "Restore flexibility and healthy movement patterns for daily life and sport." },
-      { icon: HandHeart, title: "Pain Management", copy: "Reduce discomfort using evidence-based recovery techniques." },
-      { icon: ShieldCheck, title: "Injury Prevention", copy: "Strengthen vulnerable areas to minimise future injuries." },
+      {
+        icon: Stethoscope,
+        title: "Injury Assessment",
+        copy: "Understand the root cause of the pain before treatment begins.",
+      },
+      {
+        icon: Dumbbell,
+        title: "Guided Rehabilitation",
+        copy: "Safe, progressive exercises designed to rebuild strength and mobility.",
+      },
+      {
+        icon: Activity,
+        title: "Mobility Improvement",
+        copy: "Restore flexibility and healthy movement patterns for daily life and sport.",
+      },
+      {
+        icon: HandHeart,
+        title: "Pain Management",
+        copy: "Reduce discomfort using evidence-based recovery techniques.",
+      },
+      {
+        icon: ShieldCheck,
+        title: "Injury Prevention",
+        copy: "Strengthen vulnerable areas to minimise future injuries.",
+      },
     ],
     whyTitle: "Why recovery matters",
-    whyCopy: "Many people stop training because of pain. We believe recovery should be part of every fitness journey — not something you think about only after getting injured. Recovering correctly today helps you perform better tomorrow.",
+    whyCopy:
+      "Many people stop training because of pain. We believe recovery should be part of every fitness journey — not something you think about only after getting injured. Recovering correctly today helps you perform better tomorrow.",
     bullets: [
       { icon: Trophy, text: "Recover safely" },
       { icon: Trophy, text: "Move confidently" },
@@ -152,7 +234,8 @@ const PROGRAMS: Record<string, Program> = {
     ],
     ctaLabel: "Schedule Your Recovery Session",
     ctaHref: "/auth?plan=monthly",
-    closing: "Don't let pain control your life. Book your assessment and begin your journey back to strength. 🔥",
+    closing:
+      "Don't let pain control your life. Book your assessment and begin your journey back to strength. 🔥",
   },
 };
 
@@ -164,7 +247,9 @@ export const Route = createFileRoute("/programs/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Program not found — PulseGym" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [{ title: "Program not found — PulseGym" }, { name: "robots", content: "noindex" }],
+      };
     }
     const p = loaderData.program;
     const title = `${p.eyebrow} — PulseGym`;
@@ -185,7 +270,9 @@ export const Route = createFileRoute("/programs/$slug")({
     <div className="min-h-screen grid place-items-center bg-[color:var(--bone)] text-[color:var(--ink)]">
       <div className="text-center">
         <h1 className="font-display text-4xl mb-4">Program not found</h1>
-        <Link to="/" className="text-[color:var(--blaze)] underline">Back to home</Link>
+        <Link to="/" className="text-[color:var(--blaze)] underline">
+          Back to home
+        </Link>
       </div>
     </div>
   ),
@@ -199,12 +286,18 @@ function ProgramPage() {
       <header className="border-b border-black/10 bg-white sticky top-0 z-40">
         <div className="container-x flex items-center justify-between py-4">
           <Link to="/" className="inline-flex items-center gap-3">
-            <div className="grid place-items-center w-9 h-9 bg-[color:var(--ink)] text-white font-display">P</div>
+            <div className="grid place-items-center w-9 h-9 bg-[color:var(--ink)] text-white font-display">
+              P
+            </div>
             <span className="font-display text-lg tracking-widest">
               PULSE<span className="text-[color:var(--blaze)]">GYM</span>
             </span>
           </Link>
-          <Link to="/" hash="classes" className="inline-flex items-center gap-2 text-sm hover:text-[color:var(--blaze)]">
+          <Link
+            to="/"
+            hash="classes"
+            className="inline-flex items-center gap-2 text-sm hover:text-[color:var(--blaze)]"
+          >
             <ArrowLeft size={16} /> All programs
           </Link>
         </div>
@@ -218,13 +311,18 @@ function ProgramPage() {
         </div>
         <div className="relative container-x py-24 md:py-32 text-white">
           <span className="eyebrow text-[color:var(--blaze)]">{p.eyebrow}</span>
-          <h1 className="mt-4 font-display text-5xl md:text-7xl leading-[0.95] max-w-4xl">{p.title}</h1>
+          <h1 className="mt-4 font-display text-5xl md:text-7xl leading-[0.95] max-w-4xl">
+            {p.title}
+          </h1>
           <p className="mt-6 max-w-2xl text-lg text-white/85">{p.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to={p.ctaHref} className="btn-primary">
               {p.ctaLabel} <ArrowRight size={16} />
             </Link>
-            <a href="#consult" className="btn-ghost text-white border-white/40 hover:border-[color:var(--blaze)]">
+            <a
+              href="#consult"
+              className="btn-ghost text-white border-white/40 hover:border-[color:var(--blaze)]"
+            >
               Free consultation
             </a>
           </div>
@@ -247,7 +345,10 @@ function ProgramPage() {
           <h2 className="mt-3 font-display text-4xl md:text-5xl mb-10">Is this you? 🔥</h2>
           <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
             {p.audience.map((a) => (
-              <li key={a} className="flex items-start gap-3 p-4 border border-black/10 bg-[color:var(--bone)] hover:border-[color:var(--blaze)] hover:-translate-y-0.5 transition">
+              <li
+                key={a}
+                className="flex items-start gap-3 p-4 border border-black/10 bg-[color:var(--bone)] hover:border-[color:var(--blaze)] hover:-translate-y-0.5 transition"
+              >
                 <CheckCircle2 className="text-[color:var(--blaze)] shrink-0 mt-0.5" size={20} />
                 <span className="text-sm leading-relaxed">{a}</span>
               </li>
@@ -303,7 +404,9 @@ function ProgramPage() {
       {p.results && (
         <section className="container-x py-16 md:py-20">
           <span className="eyebrow">{p.resultsTitle}</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl mb-10">Show up. Watch it change. 🔥</h2>
+          <h2 className="mt-3 font-display text-4xl md:text-5xl mb-10">
+            Show up. Watch it change. 🔥
+          </h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {p.results.map((r) => (
               <div key={r} className="p-6 bg-white border border-black/10 flex items-center gap-3">
@@ -323,8 +426,13 @@ function ProgramPage() {
       {/* CTA */}
       <section className="bg-[color:var(--blaze)] text-white py-20">
         <div className="container-x text-center">
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.02] max-w-3xl mx-auto">{p.closing}</h2>
-          <Link to={p.ctaHref} className="mt-8 inline-flex items-center gap-2 bg-[color:var(--ink)] text-white px-8 py-4 font-display tracking-widest text-sm hover:bg-black transition">
+          <h2 className="font-display text-4xl md:text-6xl leading-[1.02] max-w-3xl mx-auto">
+            {p.closing}
+          </h2>
+          <Link
+            to={p.ctaHref}
+            className="mt-8 inline-flex items-center gap-2 bg-[color:var(--ink)] text-white px-8 py-4 font-display tracking-widest text-sm hover:bg-black transition"
+          >
             {p.ctaLabel} <ArrowRight size={16} />
           </Link>
         </div>
