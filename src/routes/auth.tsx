@@ -15,9 +15,13 @@ type PlanName = typeof PLANS[number]["name"];
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
-  validateSearch: (search: Record<string, unknown>) => ({
-    plan: (typeof search.plan === "string" ? search.plan : undefined) as PlanName | undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const parsed: { plan?: PlanName | undefined } = {};
+    if (typeof search.plan === "string" && PLANS.some((p) => p.name === search.plan)) {
+      parsed.plan = search.plan as PlanName;
+    }
+    return parsed;
+  },
   head: () => ({
     meta: [
       { title: "Join PulseGym — Sign up or Log in" },

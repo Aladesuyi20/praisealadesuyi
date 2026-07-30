@@ -354,7 +354,6 @@ export function FreeConsultCard() {
           </div>
           <Link
             to="/auth"
-            search={{}}
             className="shrink-0 inline-flex items-center gap-2 bg-[color:var(--blaze)] hover:bg-white hover:text-[color:var(--ink)] text-white font-display tracking-widest text-sm px-7 py-4 shadow-[0_20px_60px_-15px_rgba(255,60,40,0.8)] transition-colors"
           >
             Claim my free session <ArrowRight size={16} />
