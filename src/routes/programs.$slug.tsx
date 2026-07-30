@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -34,10 +35,10 @@ type Program = {
   audienceTitle: string;
   audience: string[];
   featuresTitle: string;
-  features: { icon: any; title: string; copy: string }[];
+  features: { icon: LucideIcon; title: string; copy: string }[];
   whyTitle: string;
   whyCopy: string;
-  bullets?: { icon: any; text: string }[];
+  bullets?: { icon: LucideIcon; text: string }[];
   resultsTitle?: string;
   results?: string[];
   ctaLabel: string;

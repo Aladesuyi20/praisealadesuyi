@@ -149,7 +149,7 @@ Always respond as STRICT JSON — no prose outside the JSON — with this exact 
   "reply": "your markdown-friendly answer to the member",
   "isHealthFlag": boolean,
   "healthSummary": "one short paragraph the doctor should see, only if isHealthFlag is true, else empty string",
-  "recommendedCoach": "exactly one of ${COACHES.map((c) => `\"${c.key}\"`).join(", ")}, or null if no recommendation this turn"
+  "recommendedCoach": "exactly one of ${COACHES.map((c) => `"${c.key}"`).join(", ")}, or null if no recommendation this turn"
 }`;
 
     const messages = [
