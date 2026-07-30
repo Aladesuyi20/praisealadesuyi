@@ -67,19 +67,32 @@ function PulseGym() {
               PULSE<span className="text-[color:var(--blaze)]">GYM</span>
               <svg
                 className="absolute left-0 top-1/2 -translate-y-1/2 w-[110%] -ml-[5%] h-8 overflow-visible pointer-events-none"
-                viewBox="0 0 220 32"
+                viewBox="0 0 440 32"
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
-                <path
-                  d="M0,16 L60,16 L72,4 L92,28 L104,16 L140,16 L152,6 L172,26 L184,16 L220,16"
-                  fill="none"
-                  stroke="var(--gold)"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="heartbeat-strike"
-                />
+                <defs>
+                  <pattern
+                    id="ecgPattern"
+                    x="0"
+                    y="0"
+                    width="220"
+                    height="32"
+                    patternUnits="userSpaceOnUse"
+                    className="ecg-pattern"
+                  >
+                    <path
+                      d="M0,16 L60,16 L72,4 L92,28 L104,16 L140,16 L152,6 L172,26 L184,16 L220,16"
+                      fill="none"
+                      stroke="var(--gold)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="heartbeat-strike"
+                    />
+                  </pattern>
+                </defs>
+                <rect x="0" y="0" width="440" height="32" fill="url(#ecgPattern)" />
               </svg>
             </span>
           </a>
