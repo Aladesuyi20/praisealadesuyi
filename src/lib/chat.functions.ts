@@ -3,9 +3,21 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 const COACHES = [
-  { key: "Aladesuyi Marvellous", role: "Head Strength Coach", focus: "Strength, hypertrophy, powerlifting, athletic base building." },
-  { key: "Ayodele Esther", role: "Performance Coach", focus: "Conditioning, weight loss, women's training, HIIT & metabolic work." },
-  { key: "Godwin John", role: "Movement Specialist", focus: "Mobility, rehab, injury recovery, corrective exercise, posture." },
+  {
+    key: "Aladesuyi Marvellous",
+    role: "Head Strength Coach",
+    focus: "Strength, hypertrophy, powerlifting, athletic base building.",
+  },
+  {
+    key: "Ayodele Esther",
+    role: "Performance Coach",
+    focus: "Conditioning, weight loss, women's training, HIIT & metabolic work.",
+  },
+  {
+    key: "Godwin John",
+    role: "Movement Specialist",
+    focus: "Mobility, rehab, injury recovery, corrective exercise, posture.",
+  },
 ];
 
 // ---------- Threads ----------

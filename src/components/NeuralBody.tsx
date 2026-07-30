@@ -15,15 +15,21 @@ export default function NeuralBody() {
     if (!ctx) return;
 
     let raf = 0;
-    let W = 0, H = 0, DPR = 1;
+    let W = 0,
+      H = 0,
+      DPR = 1;
 
     // Body silhouette target points in normalized model space (x: -1..1, y: -1..1, z: -0.3..0.3)
     // Head, neck, torso, arms, legs — sampled along body outline.
     const targets: { x: number; y: number; z: number }[] = [];
 
     const addLine = (
-      x1: number, y1: number, z1: number,
-      x2: number, y2: number, z2: number,
+      x1: number,
+      y1: number,
+      z1: number,
+      x2: number,
+      y2: number,
+      z2: number,
       n: number,
     ) => {
       for (let i = 0; i < n; i++) {
@@ -79,26 +85,37 @@ export default function NeuralBody() {
 
     type P = {
       // origin (chaos)
-      ox: number; oy: number; oz: number;
+      ox: number;
+      oy: number;
+      oz: number;
       // target
-      tx: number; ty: number; tz: number;
+      tx: number;
+      ty: number;
+      tz: number;
       // current
-      x: number; y: number; z: number;
+      x: number;
+      y: number;
+      z: number;
       phase: number;
     };
     const parts: P[] = targets.map((t, i) => ({
       ox: (Math.random() - 0.5) * 3,
       oy: (Math.random() - 0.5) * 3,
       oz: (Math.random() - 0.5) * 1.5,
-      tx: t.x, ty: t.y, tz: t.z,
-      x: 0, y: 0, z: 0,
+      tx: t.x,
+      ty: t.y,
+      tz: t.z,
+      x: 0,
+      y: 0,
+      z: 0,
       phase: (i / N) * Math.PI * 2,
     }));
 
     const resize = () => {
       DPR = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
-      W = rect.width; H = rect.height;
+      W = rect.width;
+      H = rect.height;
       canvas.width = W * DPR;
       canvas.height = H * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
@@ -110,7 +127,7 @@ export default function NeuralBody() {
     const FORM_MS = 3200; // scatter -> formed
     const LOOP_MS = 12000; // full cycle: form, hold, drift
 
-    const easeInOut = (t: number) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
 
     const project = (x: number, y: number, z: number) => {
       const scale = Math.min(W, H) * 0.42;
@@ -130,7 +147,8 @@ export default function NeuralBody() {
       const form = easeInOut(formT);
       // gentle Y rotation
       const rotY = Math.sin(elapsed * 0.0004) * 0.55 + cyc * Math.PI * 0.15;
-      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      const cosY = Math.cos(rotY),
+        sinY = Math.sin(rotY);
 
       ctx.clearRect(0, 0, W, H);
       // background gradient
@@ -141,7 +159,14 @@ export default function NeuralBody() {
       ctx.fillRect(0, 0, W, H);
 
       // update particles
-      const projected: { px: number; py: number; depth: number; x: number; y: number; z: number }[] = [];
+      const projected: {
+        px: number;
+        py: number;
+        depth: number;
+        x: number;
+        y: number;
+        z: number;
+      }[] = [];
       for (let i = 0; i < N; i++) {
         const p = parts[i];
         // per-particle stagger
@@ -224,11 +249,5 @@ export default function NeuralBody() {
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 h-full w-full"
-      aria-hidden="true"
-    />
-  );
+  return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />;
 }
