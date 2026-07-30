@@ -108,7 +108,7 @@ function PulseGym() {
                 {n.label.toUpperCase()}
               </a>
             ))}
-            <Link to="/auth" className="btn-primary text-xs">
+            <Link to="/auth" search={{}} className="btn-primary text-xs">
               Join Now <ArrowRight size={14} />
             </Link>
           </nav>
@@ -133,7 +133,7 @@ function PulseGym() {
                   {n.label.toUpperCase()}
                 </a>
               ))}
-              <Link to="/auth" onClick={() => setOpen(false)} className="btn-primary self-start">
+              <Link to="/auth" search={{}} onClick={() => setOpen(false)} className="btn-primary self-start">
                 Join Now
               </Link>
             </div>
@@ -185,7 +185,7 @@ function Hero() {
             that gets you real results.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link to="/auth" className="btn-primary">
+            <Link to="/auth" search={{}} className="btn-primary">
               Book a trial <ArrowRight size={16} />
             </Link>
             <a href="#training" className="btn-ghost">Explore programs</a>
@@ -451,7 +451,7 @@ function Pricing() {
               </ul>
               <Link
                 to="/auth"
-                search={{ plan: p.name }}
+                search={{ plan: p.name as "Drop-in" | "Monthly" | "PT Pro" }}
                 className={`mt-10 inline-flex items-center justify-center gap-2 py-4 font-display tracking-widest text-xs transition ${
                   p.featured ? "bg-[color:var(--blaze)] text-white hover:bg-white hover:text-[color:var(--ink)]" : "bg-[color:var(--ink)] text-white hover:bg-[color:var(--blaze)]"
                 }`}
