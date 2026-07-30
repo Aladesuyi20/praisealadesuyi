@@ -63,6 +63,8 @@
   --ink: #0a0a0a;
   --bone: #f5f2ec;
   --blaze: #e63946;
+  --gold: oklch(0.75 0.18 85);
+  --gold-glow: oklch(0.85 0.22 85);
 }
 
 @layer base {
