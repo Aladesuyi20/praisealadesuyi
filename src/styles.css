@@ -137,14 +137,14 @@
 @utility animate-bounce-down { animation: bounce-down 1.6s ease-in-out infinite; }
 
 @utility heartbeat-strike {
-  stroke-dasharray: 320;
-  stroke-dashoffset: 320;
-  animation: heartbeat-draw 1.8s cubic-bezier(.2,.7,.2,1) forwards, heartbeat-pulse 1.4s ease-in-out 1.8s infinite;
-  filter: drop-shadow(0 0 4px var(--gold-glow));
+  filter: drop-shadow(0 0 5px var(--gold-glow));
 }
 
-@keyframes heartbeat-draw { to { stroke-dashoffset: 0; } }
-@keyframes heartbeat-pulse {
-  0%, 100% { opacity: .9; filter: drop-shadow(0 0 3px var(--gold-glow)); }
-  50% { opacity: 1; filter: drop-shadow(0 0 10px var(--gold-glow)); }
+@utility ecg-pattern {
+  animation: ecg-scroll 2.2s linear infinite;
+}
+
+@keyframes ecg-scroll {
+  from { x: 0; }
+  to { x: -220; }
 }
