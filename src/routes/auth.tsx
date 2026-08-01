@@ -65,18 +65,26 @@ function AuthPage() {
   async function handleGoogle() {
     setError(null);
     setBusy(true);
-    const res = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/auth",
-    });
-    if (res.error) {
-      setError(res.error.message || "Google sign-in failed.");
+    try {
+      const res = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin + "/auth",
+      });
+      if (res.error) throw res.error;
+      if (!res.redirected) navigate({ to: "/member" });
+    } catch (err) {
+      const host = window.location.hostname;
+      const external = !host.endsWith("lovable.app") && host !== "localhost";
+      setError(
+        external
+          ? "Google sign-in is only available on the official PulseGym site. Please use email and password here."
+          : err instanceof Error
+            ? err.message
+            : "Google sign-in failed.",
+      );
       setBusy(false);
-      return;
-    }
-    if (!res.redirected) {
-      navigate({ to: "/member" });
     }
   }
+
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();

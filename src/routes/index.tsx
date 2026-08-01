@@ -22,16 +22,16 @@ import {
   Check,
   ChevronRight,
 } from "lucide-react";
-import heroVideoAsset from "@/assets/hero-neural-body.mp4.asset.json";
+import heroVideoAsset from "@/assets/hero-neural-body.mp4";
 import classesImg from "@/assets/gym-classes.jpg";
 import personalImg from "@/assets/gym-personal.jpg";
 import rehabImg from "@/assets/gym-rehab.jpg";
-import trainer1Asset from "@/assets/aladesuyi-marvellous.jpg.asset.json";
-import trainer2Asset from "@/assets/ayodele-esther.jpg.asset.json";
-import trainer3Asset from "@/assets/godwin-john.jpg.asset.json";
-const trainer1 = trainer1Asset.url;
-const trainer2 = trainer2Asset.url;
-const trainer3 = trainer3Asset.url;
+import trainer1Asset from "@/assets/aladesuyi-marvellous.jpg";
+import trainer2Asset from "@/assets/ayodele-esther.jpg";
+import trainer3Asset from "@/assets/godwin-john.jpg";
+const trainer1 = trainer1Asset;
+const trainer2 = trainer2Asset;
+const trainer3 = trainer3Asset;
 
 const EMAILJS_SERVICE_ID = "service_liri6br";
 const EMAILJS_TEMPLATE_ID = "template_gg2mx7f";
@@ -186,7 +186,7 @@ function Hero() {
   return (
     <section id="home" className="relative h-[100svh] w-full overflow-hidden bg-black">
       <video
-        src={heroVideoAsset.url}
+        src={heroVideoAsset}
         autoPlay
         loop
         muted
