@@ -24,9 +24,9 @@ import {
   getThreadMessages,
   sendChat,
 } from "@/lib/chat.functions";
-import trainer1Asset from "@/assets/aladesuyi-marvellous.jpg.asset.json";
-import trainer2Asset from "@/assets/ayodele-esther.jpg.asset.json";
-import trainer3Asset from "@/assets/godwin-john.jpg.asset.json";
+import trainer1Asset from "@/assets/aladesuyi-marvellous.jpg";
+import trainer2Asset from "@/assets/ayodele-esther.jpg";
+import trainer3Asset from "@/assets/godwin-john.jpg";
 
 const EMAILJS_SERVICE_ID = "service_liri6br";
 const EMAILJS_TEMPLATE_ID = "template_gg2mx7f";
@@ -36,19 +36,19 @@ const COACHES = [
   {
     key: "Aladesuyi Marvellous",
     role: "Head Strength Coach",
-    img: trainer1Asset.url,
+    img: trainer1Asset,
     bio: "Strength, hypertrophy and powerlifting. Builds the raw force behind every serious athlete.",
   },
   {
     key: "Ayodele Esther",
     role: "Performance Coach",
-    img: trainer2Asset.url,
+    img: trainer2Asset,
     bio: "Conditioning, fat loss, women's training and metabolic work. Turns effort into visible results.",
   },
   {
     key: "Godwin John",
     role: "Movement Specialist",
-    img: trainer3Asset.url,
+    img: trainer3Asset,
     bio: "Mobility, rehab, corrective exercise and injury recovery. Keeps you training pain-free for decades.",
   },
 ];
